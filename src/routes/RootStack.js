@@ -8,6 +8,9 @@ import TreatmentManagement from "../screens/treatment/TreatmentManagement";
 import RegisterUser from "../screens/users/RegisterUser";
 import ViewAllUsers from "../screens/users/ViewAllUsers";
 import DeleteUser from "../screens/users/DeleteUser";
+import AddVehicle from "../screens/vehicles/AddVehicle";
+import DeleteVehicle from "../screens/vehicles/DeleteVehicle";
+import ViewAllVehicles from "../screens/vehicles/ViewAllVehicles";
 const Stack = createStackNavigator();
 
 const RootStack = () => {
@@ -102,6 +105,51 @@ const RootStack = () => {
             },
           }}
         />
+        <Stack.Screen
+          name="AddVehicle"
+          component={AddVehicle}
+          options={{
+            title: "Añadir Vehiculos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="ViewAllVehicles"
+          component={ViewAllVehicles}
+          options={{
+            title: "Lista de Vehiculos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="DeleteVehicle"
+          component={DeleteVehicle}
+          options={{
+            title: "Eliminar Vehiculos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        
+        
+
         <Stack.Screen
           name="TreatmentManagement"
           component={TreatmentManagement}

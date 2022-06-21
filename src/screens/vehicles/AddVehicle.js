@@ -5,43 +5,42 @@ import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from '../../database/database-connection';
 const db = DatabaseConnection.getConnection();
 
-
-const RegisterUser = ({ navigation }) => {
-  const [userName, setUserName] = useState('');
-  const [userSurname, setUserSurname] = useState('');
-  const [ci, setCi] = useState('');
-  const [vehicle, setVehicle] = useState('');
+const AddVehicle = ({ navigation }) => {
+  const [matricula, setMatricula] = useState('');
+  const [marca, setMarca] = useState('');
+  const [color, setColor] = useState('');
+  const [serial, setSerial] = useState('');
 
   const clearData = () => {
-    setUserName("");
-    setUserSurname("");
-    setCi("");
-    setVehicle("");
+    setMatricula("");
+    setMarca("");
+    setColor("");
+    setSerial("");
   };
 
-  const registerUser = () => {
-    console.log("state", userName, userSurname, ci, vehicle)
+  const addvehicle = () => {
+    console.log("state", matricula, marca, color, serial)
     debugger;
-    if (!userName.trim()) {
-      Alert.alert("Ingrese su nombre");
+    if (!matricula.trim()) {
+      Alert.alert("Ingrese la Matricula");
       return;
     }
-    if (!userSurname.trim()) {
-      Alert.alert("Ingrese su apellido");
+    if (!marca.trim()) {
+      Alert.alert("Ingrese la Marca");
       return;
     }
-    if (!ci.trim()) {
-      Alert.alert("Ingrese su cedula");
+    if (!color.trim()) {
+      Alert.alert("Ingrese el Color");
       return;
     }
-    if (!vehicle.trim()) {
-      Alert.alert("Ingrese la matricula de su vehiculo");
+    if (!serial.trim()) {
+      Alert.alert("Ingrese el Serial del Motor");
       return;
     }
     db.transaction((tx) => {
       tx.executeSql(
-        `INSERT INTO users (user_name, user_surname, ci, vehicle) VALUES (?, ?, ?,?)`,
-        [userName, userSurname, ci, vehicle],
+        `INSERT INTO vehicle (matricula, marca, color, serial) VALUES (?, ?, ?,?)`,
+        [matricula, marca, color, serial],
         (tx, results) => {
           console.log("results", results);
           // validar resultado
@@ -49,17 +48,17 @@ const RegisterUser = ({ navigation }) => {
             clearData();
             Alert.alert(
               "Exito",
-              "Usuario registrado!!!",
+              "Vehiculo Añadido!!!",
               [
                 {
                   text: "Ok",
-                  onPress: () => navigation.navigate("UserManagement"),
+                  onPress: () => navigation.navigate("VehiclesManagement"),
                 },
               ],
               { cancelable: false }
             );
           } else {
-            Alert.alert("Error al registrar usuario");
+            Alert.alert("Error al Añadir el Vehiculo");
           }
         }
       );
@@ -73,32 +72,32 @@ const RegisterUser = ({ navigation }) => {
           <ScrollView>
             <KeyboardAvoidingView style={styles.keyboardView}>
               <CustomInputText
-                placeholder="Nombre"
-                onChangeText={setUserName}
-                style={styles.Input}
-                value={userName}
-              />
-              <CustomInputText
-                placeholder="Apellido"
-                onChangeText={setUserSurname}
-                style={styles.Input}
-                value={userSurname}
-              />
-              <CustomInputText
-                placeholder="Cédula X.XXX.XXX-X"
-                onChangeText={setCi}
-                style={styles.Input}
-                value={ci}
-              />
-              <CustomInputText
                 placeholder="Matricula"
-                onChangeText={setVehicle}
+                onChangeText={setMatricula}
                 style={styles.Input}
-                value={vehicle}
+                value={matricula}
+              />
+              <CustomInputText
+                placeholder="Marca"
+                onChangeText={setMarca}
+                style={styles.Input}
+                value={marca}
+              />
+              <CustomInputText
+                placeholder="Color"
+                onChangeText={setColor}
+                style={styles.Input}
+                value={color}
+              />
+              <CustomInputText
+                placeholder="Serial del Motor"
+                onChangeText={setSerial}
+                style={styles.Input}
+                value={serial}
               />
               <CustomSingleButton
                 title="Registrar"
-                customPress={registerUser}
+                customPress={addvehicle}
               />
 
             </KeyboardAvoidingView>
@@ -109,7 +108,7 @@ const RegisterUser = ({ navigation }) => {
   )
 }
 
-export default RegisterUser
+export default AddVehicle
 
 const styles = StyleSheet.create({
   container: {
@@ -129,6 +128,5 @@ const styles = StyleSheet.create({
   Input: {
     padding: 15,
     textAlignVertical: "top",
-  },
-
+  }
 })
