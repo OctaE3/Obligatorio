@@ -43,7 +43,6 @@ const AddVehicle = ({ navigation }) => {
         [matricula, marca, color, serial],
         (tx, results) => {
           console.log("results", results);
-          // validar resultado
           if (results.rowsAffected > 0) {
             clearData();
             Alert.alert(

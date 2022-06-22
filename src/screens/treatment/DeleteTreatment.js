@@ -7,23 +7,22 @@ import DatabaseConnection from "../../database/database-connection";
 const db = DatabaseConnection.getConnection();
 
 
-const DeleteUser = ({navigation}) => {
-    const [userCi, setUserCi] = useState("");
+const DeleteTreatment = ({navigation}) => {
+    const [id, setId] = useState("");
 
-  const deleteUser = () => {
-    console.log("deleteUser");
+  const deleteTreatment = () => {
+    console.log("deleteTreatment");
     db.transaction((tx) => {
       tx.executeSql(
-        `DELETE FROM users WHERE ci = ?`,
-        [userCi],
+        `DELETE FROM treatment WHERE treatment_id = ?`,
+        [id],
         (tx, results) => {
           console.log("results", results);
-          // validar resultado
           if (results.rowsAffected > 0) {
-            Alert.alert("Usuario eliminado");
-            navigation.navigate("UserManagement");
+            Alert.alert("Tratamiento eliminado");
+            navigation.navigate("TreatmentManagement");
           } else {
-            Alert.alert("El usuario no existe");
+            Alert.alert("El tratamiento no existe");
           }
         }
       );
@@ -35,13 +34,13 @@ const DeleteUser = ({navigation}) => {
         <View style={styles.viewContainer}>
             <View style={styles.generalView}>
                 <ScrollView >
-                    <CustomText text="Busqueda de usuario" style={styles.text}/>
+                    <CustomText text="Busqueda de tratamiento" style={styles.text}/>
                         <KeyboardAvoidingView style={styles.keyboardView}>
                             <CustomInputText 
-                             placeholder="Cedula de usuario"
-                             onChangeText={(text) => setUserCi(text)}
+                             placeholder="Id del Tratamiento"
+                             onChangeText={(text) => setId(text)}
                             />
-                            <CustomSingleButton title="Eliminar" customPress={deleteUser} />
+                            <CustomSingleButton title="Eliminar" customPress={deleteTreatment} />
                         </KeyboardAvoidingView>
                 </ScrollView>
             </View>
@@ -50,7 +49,7 @@ const DeleteUser = ({navigation}) => {
   )
 }
 
-export default DeleteUser
+export default DeleteTreatment
 
 const styles = StyleSheet.create({
     container: {

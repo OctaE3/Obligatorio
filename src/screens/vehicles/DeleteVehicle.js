@@ -18,7 +18,6 @@ const DeleteVehicle = ({navigation}) => {
         [matricula],
         (tx, results) => {
           console.log("results", results);
-          // validar resultado
           if (results.rowsAffected > 0) {
             Alert.alert("Vehiculo eliminado");
             navigation.navigate("VehiclesManagement");

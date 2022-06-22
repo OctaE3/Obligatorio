@@ -1,66 +1,69 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert } from 'react-native'
+import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert, Dimensions } from 'react-native'
 import CustomInputText from '../../components/CustomInputText';
 import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from '../../database/database-connection';
-import VehicleDropDown from '../../components/VehicleDropDown';
 const db = DatabaseConnection.getConnection();
 
-
-const RegisterUser = ({ navigation }) => {
-  const [userName, setUserName] = useState('');
-  const [userSurname, setUserSurname] = useState('');
-  const [ci, setCi] = useState('');
+const AddTreatment = ({ navigation }) => {
+  const [name, setName] = useState('');
   const [vehicle, setVehicle] = useState('');
+  const [inDate, setInDate] = useState('');
+  const [finDate, setFinDate] = useState('');
+  const [price, setPrice] = useState('');
 
   const clearData = () => {
-    setUserName("");
-    setUserSurname("");
-    setCi("");
+    setName("");
     setVehicle("");
+    setInDate("");
+    setFinDate("");
+    setPrice("");
   };
 
-  const registerUser = () => {
-    console.log("state", userName, userSurname, ci, vehicle)
+  const addTreatment = () => {
+    console.log("state", name, vehicle, inDate, finDate, price)
     debugger;
-    if (!userName.trim()) {
-      Alert.alert("Ingrese su nombre");
-      return;
-    }
-    if (!userSurname.trim()) {
-      Alert.alert("Ingrese su apellido");
-      return;
-    }
-    if (!ci.trim()) {
-      Alert.alert("Ingrese su cedula");
+    if (!name.trim()) {
+      Alert.alert("Ingrese nombre");
       return;
     }
     if (!vehicle.trim()) {
-      Alert.alert("Ingrese la matricula de su vehiculo");
+      Alert.alert("Ingrese matricula");
+      return;
+    }
+    if (!inDate.trim()) {
+      Alert.alert("Ingrese fecha inicio");
+      return;
+    }
+    if (!finDate.trim()) {
+      Alert.alert("Ingrese fecha final");
+      return;
+    }
+    if (!price.trim()) {
+      Alert.alert("Ingrese precio");
       return;
     }
     db.transaction((tx) => {
       tx.executeSql(
-        `INSERT INTO users (user_name, user_surname, ci, vehicle) VALUES (?, ?, ?,?)`,
-        [userName, userSurname, ci, vehicle],
+        `INSERT INTO treatment (treatment_name, vehicle, inDate, finDate, price) VALUES (?, ?, ?, ?, ?)`,
+        [name, vehicle, inDate, finDate, price],
         (tx, results) => {
           console.log("results", results);
-          // validar resultado
           if (results.rowsAffected > 0) {
             clearData();
             Alert.alert(
               "Exito",
-              "Usuario registrado!!!",
+              "Tratamiento Añadido!!!",
               [
                 {
                   text: "Ok",
-                  onPress: () => navigation.navigate("UserManagement"),
+                  onPress: () => navigation.navigate("TreatmentManagement"),
                 },
               ],
               { cancelable: false }
             );
           } else {
-            Alert.alert("Error al registrar usuario");
+            Alert.alert("Error al Añadir el Tratamiento");
           }
         }
       );
@@ -74,22 +77,10 @@ const RegisterUser = ({ navigation }) => {
           <ScrollView>
             <KeyboardAvoidingView style={styles.keyboardView}>
               <CustomInputText
-                placeholder="Nombre"
-                onChangeText={setUserName}
+                placeholder="Nombre Tratamiento"
+                onChangeText={setName}
                 style={styles.Input}
-                value={userName}
-              />
-              <CustomInputText
-                placeholder="Apellido"
-                onChangeText={setUserSurname}
-                style={styles.Input}
-                value={userSurname}
-              />
-              <CustomInputText
-                placeholder="Cédula X.XXX.XXX-X"
-                onChangeText={setCi}
-                style={styles.Input}
-                value={ci}
+                value={name}
               />
               <CustomInputText
                 placeholder="Matricula"
@@ -97,10 +88,29 @@ const RegisterUser = ({ navigation }) => {
                 style={styles.Input}
                 value={vehicle}
               />
+              <CustomInputText
+                placeholder="Fecha inicio"
+                onChangeText={setInDate}
+                style={styles.Input}
+                value={inDate}
+              />
+              <CustomInputText
+                placeholder="Fecha final"
+                onChangeText={setFinDate}
+                style={styles.Input}
+                value={finDate}
+              />
+                <CustomInputText
+                placeholder="Costo"
+                onChangeText={setPrice}
+                style={styles.Input}
+                value={price}
+              />
               <CustomSingleButton
                 title="Registrar"
-                customPress={registerUser}
+                customPress={addTreatment}
               />
+
             </KeyboardAvoidingView>
           </ScrollView>
         </View>
@@ -109,7 +119,7 @@ const RegisterUser = ({ navigation }) => {
   )
 }
 
-export default RegisterUser
+export default AddTreatment
 
 const styles = StyleSheet.create({
   container: {
@@ -129,6 +139,5 @@ const styles = StyleSheet.create({
   Input: {
     padding: 15,
     textAlignVertical: "top",
-  },
-
+  }
 })

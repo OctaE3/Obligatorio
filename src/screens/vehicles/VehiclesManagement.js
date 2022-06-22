@@ -5,7 +5,7 @@ import DatabaseConnection from '../../database/database-connection';
 const db = DatabaseConnection.getConnection();
 
 
-const UserManagement = ({navigation}) => {
+const VehiclesManagement = ({navigation}) => {
     useEffect(() => {
         db.transaction( (txn) => {
           txn.executeSql(
@@ -14,7 +14,7 @@ const UserManagement = ({navigation}) => {
              (tx, res) =>{
               console.log('item:', res.rows.length);
               if (res.rows.length == 0) {
-                txn.executeSql('DROP TABLE IF EXISTS users', []);
+                txn.executeSql('DROP TABLE IF EXISTS vehicle', []);
                 txn.executeSql(
                   'CREATE TABLE IF NOT EXISTS vehicle(vehicle_id INTEGER PRIMARY KEY AUTOINCREMENT, matricula VARCHAR(7), marca VARCHAR(20), color VARCHAR(20), serial VARCHAR(17))',
                   []
@@ -48,11 +48,24 @@ const UserManagement = ({navigation}) => {
                      customPress={() => navigation.navigate("ViewAllVehicles")}
                    />
                    <CustomButtons
+                     title="Buscar Vehiculos"
+                     btnColor="#474747"
+                     btnIcon="search-plus"
+                     customPress={() => navigation.navigate("SearchVehicle")}
+                   />
+                   <CustomButtons
+                     title="Modificar Vehiculos"
+                     btnColor="#474747"
+                     btnIcon="gear"
+                     customPress={() => navigation.navigate("UpdateVehicle")}
+                   />
+                   <CustomButtons
                      title="Eliminar Vehiculos"
                      btnColor="#474747"
                      btnIcon="close"
                      customPress={() => navigation.navigate("DeleteVehicle")}
                    />
+                  
                 </ScrollView>
             </View>
         </View>
@@ -60,7 +73,7 @@ const UserManagement = ({navigation}) => {
   )
 }
 
-export default UserManagement
+export default VehiclesManagement
 
 const styles = StyleSheet.create({
     container: {

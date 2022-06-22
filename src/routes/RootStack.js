@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+
 import HomeScreen from "../screens/HomeScreen";
 import UserManagement from "../screens/users/UserManagement";
 import VehiclesManagement from "../screens/vehicles/VehiclesManagement";
@@ -11,6 +12,17 @@ import DeleteUser from "../screens/users/DeleteUser";
 import AddVehicle from "../screens/vehicles/AddVehicle";
 import DeleteVehicle from "../screens/vehicles/DeleteVehicle";
 import ViewAllVehicles from "../screens/vehicles/ViewAllVehicles";
+import SearchUser from "../screens/users/SearchUser";
+import SearchVehicle from "../screens/vehicles/SearchVehicle";
+import UpdateUser from "../screens/users/UpdateUser";
+import UpdateVehicle from "../screens/vehicles/UpdateVehicle";
+import AddTreatment from "../screens/treatment/AddTreatment";
+import DeleteTreatment from "../screens/treatment/DeleteTreatment";
+import SearchTreatment from "../screens/treatment/SearchTreatment";
+import UpdateTreatment from "../screens/treatment/UpdateTreatment";
+import ViewAllTreatments from "../screens/treatment/ViewAllTreatments";
+
+
 const Stack = createStackNavigator();
 
 const RootStack = () => {
@@ -32,6 +44,8 @@ const RootStack = () => {
           }}
         />
         
+          {/* Usuarios */}
+
         <Stack.Screen
           name="UserManagement"
           component={UserManagement}
@@ -74,6 +88,34 @@ const RootStack = () => {
             },
           }}
         />
+               <Stack.Screen
+          name="SearchUser"
+          component={SearchUser}
+          options={{
+            title: "Buscar vehiculo",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="UpdateUser"
+          component={UpdateUser}
+          options={{
+            title: "Modificar usuarios",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
          <Stack.Screen
           name="DeleteUser"
           component={DeleteUser}
@@ -89,7 +131,7 @@ const RootStack = () => {
           }}
         />
 
-
+          {/* Vehiculos */}
 
         <Stack.Screen
           name="VehiclesManagement"
@@ -134,6 +176,34 @@ const RootStack = () => {
           }}
         />
         <Stack.Screen
+          name="SearchVehicle"
+          component={SearchVehicle}
+          options={{
+            title: "Buscar vehiculo",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="UpdateVehicle"
+          component={UpdateVehicle}
+          options={{
+            title: "Modificar Vehiculos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
           name="DeleteVehicle"
           component={DeleteVehicle}
           options={{
@@ -148,7 +218,7 @@ const RootStack = () => {
           }}
         />
         
-        
+        {/* Tratamientos*/}
 
         <Stack.Screen
           name="TreatmentManagement"
@@ -163,7 +233,77 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        />                                  
+        /> 
+        <Stack.Screen
+          name="AddTreatment"
+          component={AddTreatment}
+          options={{
+            title: "Añadir Tratamiento",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="ViewAllTreatments"
+          component={ViewAllTreatments}
+          options={{
+            title: "Lista de Tratamientos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="SearchTreatment"
+          component={SearchTreatment}
+          options={{
+            title: "Buscar tratamiento",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="UpdateTreatment"
+          component={UpdateTreatment}
+          options={{
+            title: "Modificar Tratamiento",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="DeleteTreatment"
+          component={DeleteTreatment}
+          options={{
+            title: "Eliminar tratamiento",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />                                 
       </Stack.Navigator>
     </NavigationContainer>
   );

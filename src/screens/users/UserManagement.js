@@ -48,6 +48,18 @@ const UserManagement = ({navigation}) => {
                      customPress={() => navigation.navigate("ViewAllUsers")}
                    />
                    <CustomButtons
+                     title="Buscar usuario"
+                     btnColor="#474747"
+                     btnIcon="search-plus"
+                     customPress={() => navigation.navigate("SearchUser")}
+                   />
+                    <CustomButtons
+                     title="Modificar usuarios"
+                     btnColor="#474747"
+                     btnIcon="gear"
+                     customPress={() => navigation.navigate("UpdateUser")}
+                   />
+                   <CustomButtons
                      title="Eliminar usuarios"
                      btnColor="#474747"
                      btnIcon="close"
