@@ -4,6 +4,7 @@ import CustomInputText from '../../components/CustomInputText'
 import CustomSingleButton from '../../components/CustomSingleButton'
 import CustomText from '../../components/CustomText'
 import DatabaseConnection from "../../database/database-connection";
+import VehicleDropDown from '../../components/VehicleDropDown'
 const db = DatabaseConnection.getConnection();
 
 
@@ -84,11 +85,11 @@ const UpdateTreatment = ({navigation}) => {
                   value={name}
                   onChangeText={(text) => setName(text)}
                 />
-                <CustomInputText
-                  placeholder="Ingrese matricula"
-                  value={vehicle}
-                  onChangeText={(text) => setVehicle(text)}
-                />
+               <VehicleDropDown
+               defaultButtonText={"Matricula"}
+               onSelect={setVehicle}
+               defaultValue={vehicle}
+              />
                 <CustomInputText
                   placeholder="Ingrese fecha inicio"
                   value={inDate}

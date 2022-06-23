@@ -88,14 +88,13 @@ const RegisterUser = ({ navigation }) => {
               <CustomInputText
                 placeholder="Cédula X.XXX.XXX-X"
                 onChangeText={setCi}
+                keyboardType="number-pad"
                 style={styles.Input}
                 value={ci}
               />
-              <CustomInputText
-                placeholder="Matricula"
-                onChangeText={setVehicle}
-                style={styles.Input}
-                value={vehicle}
+              <VehicleDropDown
+               defaultButtonText={"Matricula"}
+               onSelect={setVehicle}
               />
               <CustomSingleButton
                 title="Registrar"

@@ -1,62 +1,68 @@
-/* import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text} from 'react-native'
-import DropDownPicker from 'react-native-dropdown-picker';
-import { View } from "react-native-web";
+import SelectDropdown from "react-native-select-dropdown";
 import DatabaseConnection from '../database/database-connection';
 const db = DatabaseConnection.getConnection();
 
-const VehicleDropDown = () => {
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
-    const [vehicle, setVehicle] = useState([]);
+const VehicleDropDown = (props, {navigation}) => {
+    const [vehiculos, setVehiculos] = useState([]);
     
     useEffect(() => {
-        db.transaction((tx) => {
-          tx.executeSql(`SELECT vehicle_id, matricula FROM vehicle`, [], (tx, results) => {
-            console.log("results", results);
-            if (results.rows.length > 0) {
-              var temp = [];
-              for (let i = 0; i < results.rows.length; ++i){
-              let {id, matricula} = results.row[i]
-              let element = {id: id, label: matricula} 
-              console.log(element)
-              temp.push(element);
-              setVehicle(temp);
-            }
-           
-        }else {
+      db.transaction((tx) => {
+        tx.executeSql(`SELECT * FROM vehicle`, [], (tx, results) => {
+          console.log("results", results);
+          if (results.rows.length > 0) {
+            var temp = [];
+            for (let i = 0; i < results.rows.length; ++i)
+              temp.push(results.rows.item(i));
+            setVehiculos(temp);
+          } else {
             Alert.alert(
-                "Mensaje",
-                "No hay vehiculos agrege uno!!!",
-            [
+              "Mensaje",
+              "No hay Vehiculos!!!",
+              [
                 {
-                    text: "Ok",
-                    onPress: () => navigation.navigate("VehiclesManagement"),
+                  text: "Ok",
+                  onPress: () => navigation.navigate("VehiclesManagement"),
                 },
-            ],
-                 { cancelable: false }
-        );
-         }
-          });
+              ],
+              { cancelable: false }
+            );
+          }
         });
-      }, []);
+      });
+    }, []);
 
 
     return (
-    //     <DropDownPicker
-    //     open={open}
-    //     value={value}
-    //     item={vehicle}
-    //     setOpen={setOpen}
-    //     setValue={setValue}
-    //     setItems={setVehicle}
-    //   /> 
-    <Text> 
-        66666
-    </Text>
+      <SelectDropdown
+	data={vehiculos.map(vehiculos => vehiculos.matricula)}
+  onSelect={props.onSelect}
+  buttonStyle={styles.btn}
+  defaultValue={props.defaultValue}
+  defaultButtonText={props.defaultButtonText}
+	buttonTextAfterSelection={(selectedItem, index) => {
+		return selectedItem
+	}}
+	rowTextForSelection={(item, index) => {
+		return item
+	}}
+/>
   )
 }
 
 export default VehicleDropDown
 
-const styles = StyleSheet.create({}) */
+const styles = StyleSheet.create({
+  btn:{
+    alignSelf: "center",
+    flex: 1,
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 10,
+    marginBottom: 10,
+    borderColor: "#d3d3d3",
+    borderWidth: 1,
+  }
+
+})

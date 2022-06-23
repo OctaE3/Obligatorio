@@ -3,6 +3,7 @@ import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert
 import CustomInputText from '../../components/CustomInputText';
 import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from '../../database/database-connection';
+import VehicleDropDown from '../../components/VehicleDropDown';
 const db = DatabaseConnection.getConnection();
 
 const AddTreatment = ({ navigation }) => {
@@ -82,11 +83,9 @@ const AddTreatment = ({ navigation }) => {
                 style={styles.Input}
                 value={name}
               />
-              <CustomInputText
-                placeholder="Matricula"
-                onChangeText={setVehicle}
-                style={styles.Input}
-                value={vehicle}
+              <VehicleDropDown
+               defaultButtonText={"Matricula"}
+               onSelect={setVehicle}
               />
               <CustomInputText
                 placeholder="Fecha inicio"
@@ -110,7 +109,6 @@ const AddTreatment = ({ navigation }) => {
                 title="Registrar"
                 customPress={addTreatment}
               />
-
             </KeyboardAvoidingView>
           </ScrollView>
         </View>

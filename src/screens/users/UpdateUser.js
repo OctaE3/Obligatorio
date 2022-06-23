@@ -4,6 +4,7 @@ import CustomInputText from '../../components/CustomInputText'
 import CustomSingleButton from '../../components/CustomSingleButton'
 import CustomText from '../../components/CustomText'
 import DatabaseConnection from "../../database/database-connection";
+import VehicleDropDown from '../../components/VehicleDropDown'
 const db = DatabaseConnection.getConnection();
 
 
@@ -91,12 +92,12 @@ const UpdateUser = ({navigation}) => {
                   placeholder="Ingrese la cedula"
                   value={ci}
                   onChangeText={(text) => setCi(text)}
-                />  
-                <CustomInputText
-                  placeholder="Ingrese la matricula"
-                  value={vehicle}
-                  onChangeText={(text) => setVehicle(text)}
-                />  
+                />                 
+               <VehicleDropDown
+               defaultButtonText={"Matricula"}
+               onSelect={setVehicle}
+               defaultValue={vehicle}
+              />
                 <CustomSingleButton title="Modificar" customPress={updateUser} />
               </KeyboardAvoidingView>
             </ScrollView>
