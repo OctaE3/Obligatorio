@@ -27,6 +27,18 @@ const HomeScreen = ({navigation}) => {
               btnIcon="wrench"
               customPress={() => navigation.navigate("TreatmentManagement")}
             />
+            <CustomButtons 
+              title="Zona Repuestos"
+              btnColor="#474747"
+              btnIcon="gear"
+              customPress={() => navigation.navigate("ReplacementManagement")}
+            />
+             <CustomButtons 
+              title="Zona Insumos"
+              btnColor="#474747"
+              btnIcon="tint"
+              customPress={() => navigation.navigate("SuppliesManagement")}
+            />
 
 
           </ScrollView>

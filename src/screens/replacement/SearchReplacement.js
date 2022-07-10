@@ -3,31 +3,31 @@ import { StyleSheet, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView
 import CustomText from '../../components/CustomText';
 import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from "../../database/database-connection";
-import VehicleDropDown from '../../components/VehicleDropDown';
+import ReplacementDropDown from '../../components/ReplacementDropDown';
 const db = DatabaseConnection.getConnection();
 
-const SearchUser = ({navigation}) => {
-    const [vehicleMatricula, setVehicleMatricula] = useState("");
-    const [vehicleData, setVehicleData] = useState(null);
+const SearchReplacement = ({navigation}) => {
+    const [id, setId] = useState("");
+    const [data, setData] = useState(null);
     
-    const getVehicleData = () => {
-        console.log("getVehicleData");
-        setVehicleData({});
+    const getData = () => {
+        console.log("getData");
+        setData({});
     
-        if (!vehicleMatricula.trim()) {
-          Alert.alert("La matricula es requerida");
+        if (!id.trim()) {
+          Alert.alert("La codigo es requerido");
           return;
         }  
         db.transaction((tx) => {
           tx.executeSql(
-            `SELECT * FROM vehicle WHERE matricula = ?`,
-            [vehicleMatricula],
+            `SELECT * FROM replacement WHERE replacement_id = ?`,
+            [id],
             (tx, results) => {
               console.log("results", results);
               if (results.rows.length > 0) {
-                setVehicleData(results.rows.item(0));
+                setData(results.rows.item(0));
               } else {
-                Alert.alert("El vehiculo no existe");
+                Alert.alert("El repuesto no existe");
               }
             }
           );
@@ -39,16 +39,16 @@ const SearchUser = ({navigation}) => {
             <View style={styles.generalView}>
                 <ScrollView>
                 <KeyboardAvoidingView style={styles.keyboardView}>
-                    <CustomText  text="Filtro de vehiculos" style={styles.text}/>
-                    <VehicleDropDown
-                     defaultButtonText={"Matricula"}
-                     onSelect={setVehicleMatricula}
-                    />
-                    <CustomSingleButton title="Buscar" customPress={getVehicleData}/>
+                    <CustomText  text="Filtro de repuestos" style={styles.text}/>
+                    <ReplacementDropDown
+                                defaultButtonText={"Codigo"}
+                                onSelect={setId}
+                            />
+                    <CustomSingleButton title="Buscar" customPress={getData}/>
                     <View style={styles.presenterView}>
-                        <CustomText text={`Marca: ${!vehicleData ? '' : vehicleData.marca}`} style={styles.presenterText}/>
-                        <CustomText text={`Color: ${!vehicleData ? '' : vehicleData.color}`} style={styles.presenterText}/>
-                        <CustomText text={`Serial: ${!vehicleData ? '' : vehicleData.serial}`} style={styles.presenterText}/>
+                        <CustomText text={`Nombre: ${!data ? '' : data.replacement_name}`} style={styles.presenterText}/>
+                        <CustomText text={`Cantidad: ${!data ? '' : data.amount}`} style={styles.presenterText}/>
+                        <CustomText text={`Tratamiento: ${!data ? '' : data.treatment}`} style={styles.presenterText}/>
                     </View>
                 </KeyboardAvoidingView>
                 </ScrollView>
@@ -58,7 +58,7 @@ const SearchUser = ({navigation}) => {
   )
 }
 
-export default SearchUser
+export default SearchReplacement
 
 const styles = StyleSheet.create({
     container: {

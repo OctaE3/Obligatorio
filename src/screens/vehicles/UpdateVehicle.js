@@ -4,6 +4,7 @@ import CustomInputText from '../../components/CustomInputText'
 import CustomSingleButton from '../../components/CustomSingleButton'
 import CustomText from '../../components/CustomText'
 import DatabaseConnection from "../../database/database-connection";
+import VehicleDropDown from '../../components/VehicleDropDown';
 const db = DatabaseConnection.getConnection();
 
 
@@ -71,11 +72,10 @@ const UpdateVehicle = ({navigation}) => {
             <ScrollView keyboardShouldPersistTaps="handled">
               <KeyboardAvoidingView behavior="padding" style={styles.keyboardView}>
                 <CustomText text="Buscar vehiculo" style={styles.text}/>
-                <CustomInputText
-                  placeholder="Matricula"
-                  style={styles.inputStyle}
-                  onChangeText={(text) => setSearchMatricula(text)}
-                />
+                <VehicleDropDown
+                     defaultButtonText={"Matricula"}
+                     onSelect={setSearchMatricula}
+                    />
                 <CustomSingleButton title="Buscar" customPress={SearchVehicle} />
                 <CustomInputText
                   placeholder="Ingrese la matricula"

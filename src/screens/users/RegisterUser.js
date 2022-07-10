@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert } from 'react-native'
+import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert} from 'react-native'
 import CustomInputText from '../../components/CustomInputText';
 import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from '../../database/database-connection';
 import VehicleDropDown from '../../components/VehicleDropDown';
 const db = DatabaseConnection.getConnection();
 
-
 const RegisterUser = ({ navigation }) => {
   const [userName, setUserName] = useState('');
   const [userSurname, setUserSurname] = useState('');
   const [ci, setCi] = useState('');
   const [vehicle, setVehicle] = useState('');
+  const ciRegex = /\b[1-9]{1}.[0-9]{3}.[0-9]{3}-[0-9]{1}\b/;
 
   const clearData = () => {
     setUserName("");
@@ -31,8 +31,8 @@ const RegisterUser = ({ navigation }) => {
       Alert.alert("Ingrese su apellido");
       return;
     }
-    if (!ci.trim()) {
-      Alert.alert("Ingrese su cedula");
+    if (!ciRegex.test(ci)) {
+      Alert.alert("Cedula invalida");
       return;
     }
     if (!vehicle.trim()) {

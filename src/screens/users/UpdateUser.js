@@ -5,6 +5,7 @@ import CustomSingleButton from '../../components/CustomSingleButton'
 import CustomText from '../../components/CustomText'
 import DatabaseConnection from "../../database/database-connection";
 import VehicleDropDown from '../../components/VehicleDropDown'
+import UserDropDown from '../../components/UserDropDown'
 const db = DatabaseConnection.getConnection();
 
 
@@ -72,10 +73,9 @@ const UpdateUser = ({navigation}) => {
             <ScrollView keyboardShouldPersistTaps="handled">
               <KeyboardAvoidingView behavior="padding" style={styles.keyboardView}>
                 <CustomText text="Buscar Usuario" style={styles.text}/>
-                <CustomInputText
-                  placeholder="Cedula"
-                  style={styles.inputStyle}
-                  onChangeText={(text) => setSearchCi(text)}
+                <UserDropDown
+                          defaultButtonText={"Cedula"}
+                            onSelect={setSearchCi}
                 />
                 <CustomSingleButton title="Buscar" customPress={searchUser} />
                 <CustomInputText

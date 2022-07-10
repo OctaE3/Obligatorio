@@ -7,6 +7,7 @@ import VehicleDropDown from '../../components/VehicleDropDown';
 const db = DatabaseConnection.getConnection();
 
 const AddTreatment = ({ navigation }) => {
+  const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [vehicle, setVehicle] = useState('');
   const [inDate, setInDate] = useState('');
@@ -14,6 +15,7 @@ const AddTreatment = ({ navigation }) => {
   const [price, setPrice] = useState('');
 
   const clearData = () => {
+    setId("");
     setName("");
     setVehicle("");
     setInDate("");
@@ -22,8 +24,11 @@ const AddTreatment = ({ navigation }) => {
   };
 
   const addTreatment = () => {
-    console.log("state", name, vehicle, inDate, finDate, price)
-    debugger;
+    console.log("state", id, name, vehicle, inDate, finDate, price)
+    if (!id.trim()) {
+      Alert.alert("Ingrese codigo");
+      return;
+    }
     if (!name.trim()) {
       Alert.alert("Ingrese nombre");
       return;
@@ -46,8 +51,8 @@ const AddTreatment = ({ navigation }) => {
     }
     db.transaction((tx) => {
       tx.executeSql(
-        `INSERT INTO treatment (treatment_name, vehicle, inDate, finDate, price) VALUES (?, ?, ?, ?, ?)`,
-        [name, vehicle, inDate, finDate, price],
+        `INSERT INTO treatment (treatment_id, treatment_name, vehicle, inDate, finDate, price) VALUES (?, ?, ?, ?, ?, ?)`,
+        [id, name, vehicle, inDate, finDate, price],
         (tx, results) => {
           console.log("results", results);
           if (results.rowsAffected > 0) {
@@ -77,6 +82,12 @@ const AddTreatment = ({ navigation }) => {
         <View style={styles.generalView}>
           <ScrollView>
             <KeyboardAvoidingView style={styles.keyboardView}>
+            <CustomInputText
+                placeholder="Codigo Tratamiento"
+                onChangeText={setId}
+                style={styles.Input}
+                value={id}
+              />
               <CustomInputText
                 placeholder="Nombre Tratamiento"
                 onChangeText={setName}
@@ -102,6 +113,7 @@ const AddTreatment = ({ navigation }) => {
                 <CustomInputText
                 placeholder="Costo"
                 onChangeText={setPrice}
+                keyboardType="number-pad"
                 style={styles.Input}
                 value={price}
               />

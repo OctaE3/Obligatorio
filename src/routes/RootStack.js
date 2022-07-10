@@ -21,7 +21,18 @@ import DeleteTreatment from "../screens/treatment/DeleteTreatment";
 import SearchTreatment from "../screens/treatment/SearchTreatment";
 import UpdateTreatment from "../screens/treatment/UpdateTreatment";
 import ViewAllTreatments from "../screens/treatment/ViewAllTreatments";
-
+import ReplacementManagement from "../screens/replacement/ReplacementManagement";
+import AddReplacement from "../screens/replacement/AddReplacement";
+import DeleteReplacement from "../screens/replacement/DeleteReplacement";
+import SearchReplacement from "../screens/replacement/SearchReplacement";
+import UpdateReplacement from "../screens/replacement/UpdateReplacement";
+import ViewAllReplacements from "../screens/replacement/ViewAllReplacements";
+import SuppliesManagement from "../screens/supplies/SuppliesManagement";
+import AddSupplies from "../screens/supplies/AddSupplies";
+import DeleteSupplies from "../screens/supplies/DeleteSupplies";
+import SearchSupplies from "../screens/supplies/SearchSupplies";
+import UpdateSupplies from "../screens/supplies/UpdateSupplies";
+import ViewAllSupplies from "../screens/supplies/ViewAllSupplies";
 
 const Stack = createStackNavigator();
 
@@ -303,7 +314,177 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        />                                 
+        />              
+        {/* Repuestos*/}
+        <Stack.Screen
+          name="ReplacementManagement"
+          component={ReplacementManagement}
+          options={{
+            title: "Gestión de repuestos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        /> 
+         <Stack.Screen
+          name="AddReplacement"
+          component={AddReplacement}
+          options={{
+            title: "Agregar Repuestos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        /> 
+          <Stack.Screen
+          name="DeleteReplacement"
+          component={DeleteReplacement}
+          options={{
+            title: "Borrar Repuestos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="SearchReplacement"
+          component={SearchReplacement}
+          options={{
+            title: "Buscar Repuestos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />  
+        <Stack.Screen
+          name="UpdateReplacement"
+          component={UpdateReplacement}
+          options={{
+            title: "Modificar Repuestos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="ViewAllReplacements"
+          component={ViewAllReplacements}
+          options={{
+            title: "Ver Repuestos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+          {/* Insumos*/}
+          <Stack.Screen
+          name="SuppliesManagement"
+          component={SuppliesManagement}
+          options={{
+            title: "Gestión de insumos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="AddSupplies"
+          component={AddSupplies}
+          options={{
+            title: "Agregar insumos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        /> 
+        <Stack.Screen
+          name="DeleteSupplies"
+          component={DeleteSupplies}
+          options={{
+            title: "Eliminar insumos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        /> 
+        <Stack.Screen
+          name="SearchSupplies"
+          component={SearchSupplies}
+          options={{
+            title: "Buscar insumos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />  
+        <Stack.Screen
+          name="UpdateSupplies"
+          component={UpdateSupplies}
+          options={{
+            title: "Modificar insumos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />  
+        <Stack.Screen
+          name="ViewAllSupplies"
+          component={ViewAllSupplies}
+          options={{
+            title: "Ver insumos",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />  
       </Stack.Navigator>
     </NavigationContainer>
   );

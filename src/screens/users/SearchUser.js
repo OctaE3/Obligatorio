@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import { StyleSheet, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView } from 'react-native'
 import CustomText from '../../components/CustomText';
-import CustomInputText from '../../components/CustomInputText';
 import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from "../../database/database-connection";
+import UserDropDown from '../../components/UserDropDown';
 const db = DatabaseConnection.getConnection();
 
 const SearchUser = ({navigation}) => {
@@ -40,11 +40,10 @@ const SearchUser = ({navigation}) => {
                 <ScrollView>
                 <KeyboardAvoidingView style={styles.keyboardView}>
                     <CustomText  text="Filtro de usuario" style={styles.text}/>
-                    <CustomInputText
-                     style={styles.inputStyle}
-                     placeholder="Cedula"
-                     onChangeText={(text) => setUserCi(text)}
-                    />
+                    <UserDropDown
+                                defaultButtonText={"Cedula"}
+                                onSelect={setUserCi}
+                            />
                     <CustomSingleButton title="Buscar" customPress={getUserData}/>
                     <View style={styles.presenterView}>
                         <CustomText text={`Nombre: ${!userData ? '' : userData.user_name}`} style={styles.presenterText}/>

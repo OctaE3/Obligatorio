@@ -4,6 +4,7 @@ import CustomInputText from '../../components/CustomInputText'
 import CustomSingleButton from '../../components/CustomSingleButton'
 import CustomText from '../../components/CustomText'
 import DatabaseConnection from "../../database/database-connection";
+import TreatmentDropDown from '../../components/TreatmentDropDown'
 const db = DatabaseConnection.getConnection();
 
 
@@ -36,10 +37,10 @@ const DeleteTreatment = ({navigation}) => {
                 <ScrollView >
                     <CustomText text="Busqueda de tratamiento" style={styles.text}/>
                         <KeyboardAvoidingView style={styles.keyboardView}>
-                            <CustomInputText 
-                             placeholder="Id del Tratamiento"
-                             onChangeText={(text) => setId(text)}
-                            />
+                            <TreatmentDropDown 
+                              defaultButtonText={"Tratamiento"}
+                              onSelect={setId}
+                            />                            
                             <CustomSingleButton title="Eliminar" customPress={deleteTreatment} />
                         </KeyboardAvoidingView>
                 </ScrollView>

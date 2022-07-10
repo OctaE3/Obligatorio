@@ -10,6 +10,8 @@ const AddVehicle = ({ navigation }) => {
   const [marca, setMarca] = useState('');
   const [color, setColor] = useState('');
   const [serial, setSerial] = useState('');
+  const matriculaRegex = /\b[A-Z]{3}\d{4}\b/;
+  const serialRegex = /\b([A-Z0-9]){17}\b/;
 
   const clearData = () => {
     setMatricula("");
@@ -17,14 +19,14 @@ const AddVehicle = ({ navigation }) => {
     setColor("");
     setSerial("");
   };
-
+ 
   const addvehicle = () => {
     console.log("state", matricula, marca, color, serial)
     debugger;
-    if (!matricula.trim()) {
-      Alert.alert("Ingrese la Matricula");
+    if(!matriculaRegex.test(matricula)){
+      Alert.alert("Matricula invalida")
       return;
-    }
+    }    
     if (!marca.trim()) {
       Alert.alert("Ingrese la Marca");
       return;
@@ -33,8 +35,8 @@ const AddVehicle = ({ navigation }) => {
       Alert.alert("Ingrese el Color");
       return;
     }
-    if (!serial.trim()) {
-      Alert.alert("Ingrese el Serial del Motor");
+    if (!serialRegex.test(serial)) {
+      Alert.alert("Serial del Motor invalida");
       return;
     }
     db.transaction((tx) => {
@@ -76,6 +78,7 @@ const AddVehicle = ({ navigation }) => {
                 style={styles.Input}
                 value={matricula}
               />
+              
               <CustomInputText
                 placeholder="Marca"
                 onChangeText={setMarca}

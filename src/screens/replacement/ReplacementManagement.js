@@ -9,14 +9,14 @@ const TreatmentManagement = ({navigation}) => {
     useEffect(() => {
         db.transaction( (txn) => {
           txn.executeSql(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='treatment'",
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='replacement'",
             [],
              (tx, res) =>{
               console.log('item:', res.rows.length);
               if (res.rows.length == 0) {
-                txn.executeSql('DROP TABLE IF EXISTS treatment', []);
+                txn.executeSql('DROP TABLE IF EXISTS replacement', []);
                 txn.executeSql(
-                  'CREATE TABLE IF NOT EXISTS treatment(treatment_id VARCHAR(9) PRIMARY KEY, treatment_name VARCHAR(25), vehicle VARCHAR(7), inDate VARCHAR(10), finDate VARCHAR(10), price INTEGER)',
+                  'CREATE TABLE IF NOT EXISTS replacement(replacement_id INTEGER PRIMARY KEY AUTOINCREMENT, replacement_name VARCHAR(25), amount INTEGER , treatment VARCHAR(9))',
                   []
                 );
               }
@@ -27,7 +27,7 @@ const TreatmentManagement = ({navigation}) => {
     
       const removeElementsOnDatabase = () => {
         db.transaction( (txn) => {
-          txn.executeSql('DELETE FROM treatment', []);
+          txn.executeSql('DELETE FROM replacement', []);
         });
       }
     return (
@@ -36,34 +36,34 @@ const TreatmentManagement = ({navigation}) => {
             <View style={styles.generalView}>
                 <ScrollView>
                    <CustomButtons
-                     title="Registro de Tratamiento"
+                     title="Registro de Repuesto"
                      btnColor="#474747"
                      btnIcon="check"
-                     customPress={() => navigation.navigate("AddTreatment")}
+                     customPress={() => navigation.navigate("AddReplacement")}
                    />
                    <CustomButtons
-                     title="Ver Trataminetos"
+                     title="Ver Repuestos"
                      btnColor="#474747"
                      btnIcon="search"
-                     customPress={() => navigation.navigate("ViewAllTreatments")}
+                     customPress={() => navigation.navigate("ViewAllReplacements")}
                    />
                    <CustomButtons
-                     title="Buscar Tratamiento"
+                     title="Buscar Repuestos"
                      btnColor="#474747"
                      btnIcon="search-plus"
-                     customPress={() => navigation.navigate("SearchTreatment")}
+                     customPress={() => navigation.navigate("SearchReplacement")}
                    />
                    <CustomButtons
-                     title="Modificar Tratamiento"
+                     title="Modificar Repuestos"
                      btnColor="#474747"
                      btnIcon="gear"
-                     customPress={() => navigation.navigate("UpdateTreatment")}
+                     customPress={() => navigation.navigate("UpdateReplacement")}
                    />
                    <CustomButtons
-                     title="Eliminar Tratamiento"
+                     title="Eliminar Repuestos"
                      btnColor="#474747"
                      btnIcon="close"
-                     customPress={() => navigation.navigate("DeleteTreatment")}
+                     customPress={() => navigation.navigate("DeleteReplacement")}
                    />
                   
                 </ScrollView>

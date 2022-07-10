@@ -1,30 +1,29 @@
 import React, {useState} from 'react'
-import { StyleSheet, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView } from 'react-native'
-import CustomInputText from '../../components/CustomInputText'
+import { StyleSheet, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView} from 'react-native'
 import CustomSingleButton from '../../components/CustomSingleButton'
 import CustomText from '../../components/CustomText'
 import DatabaseConnection from "../../database/database-connection";
-import UserDropDown from '../../components/UserDropDown'
+import SuppliesDropDown from '../../components/SuppliesDropDown';
 const db = DatabaseConnection.getConnection();
 
 
-const DeleteUser = ({navigation}) => {
-    const [userCi, setUserCi] = useState("");
+const DeleteSupplies = ({navigation}) => {
+    const [id, setId] = useState("");
 
-  const deleteUser = () => {
-    console.log("deleteUser");
+  const deleteSupplies = () => {
+    console.log("deleteSupplies");
     db.transaction((tx) => {
       tx.executeSql(
-        `DELETE FROM users WHERE ci = ?`,
-        [userCi],
+        `DELETE FROM supplies WHERE supplies_id = ?`,
+        [id],
         (tx, results) => {
           console.log("results", results);
           // validar resultado
           if (results.rowsAffected > 0) {
-            Alert.alert("Usuario eliminado");
-            navigation.navigate("UserManagement");
+            Alert.alert("Insumo eliminado");
+            navigation.navigate("SuppliesManagement");
           } else {
-            Alert.alert("El usuario no existe");
+            Alert.alert("El insumo no existe");
           }
         }
       );
@@ -36,13 +35,13 @@ const DeleteUser = ({navigation}) => {
         <View style={styles.viewContainer}>
             <View style={styles.generalView}>
                 <ScrollView >
-                    <CustomText text="Busqueda de usuario" style={styles.text}/>
+                    <CustomText text="Busqueda de insumos" style={styles.text}/>
                         <KeyboardAvoidingView style={styles.keyboardView}>
-                            <UserDropDown
-                                defaultButtonText={"Cedula"}
-                                onSelect={setUserCi}
+                            <SuppliesDropDown
+                                defaultButtonText={"Codigo"}
+                                onSelect={setId}
                             />
-                            <CustomSingleButton title="Eliminar" customPress={deleteUser} />
+                            <CustomSingleButton title="Eliminar" customPress={deleteSupplies} />
                         </KeyboardAvoidingView>
                 </ScrollView>
             </View>
@@ -51,7 +50,7 @@ const DeleteUser = ({navigation}) => {
   )
 }
 
-export default DeleteUser
+export default DeleteSupplies
 
 const styles = StyleSheet.create({
     container: {

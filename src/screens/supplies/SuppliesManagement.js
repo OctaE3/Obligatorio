@@ -5,18 +5,18 @@ import DatabaseConnection from '../../database/database-connection';
 const db = DatabaseConnection.getConnection();
 
 
-const TreatmentManagement = ({navigation}) => {
+const SuppliesManagement = ({navigation}) => {
     useEffect(() => {
         db.transaction( (txn) => {
           txn.executeSql(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='treatment'",
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='supplies'",
             [],
              (tx, res) =>{
               console.log('item:', res.rows.length);
               if (res.rows.length == 0) {
-                txn.executeSql('DROP TABLE IF EXISTS treatment', []);
+                txn.executeSql('DROP TABLE IF EXISTS supplies', []);
                 txn.executeSql(
-                  'CREATE TABLE IF NOT EXISTS treatment(treatment_id VARCHAR(9) PRIMARY KEY, treatment_name VARCHAR(25), vehicle VARCHAR(7), inDate VARCHAR(10), finDate VARCHAR(10), price INTEGER)',
+                  'CREATE TABLE IF NOT EXISTS supplies(supplies_id INTEGER PRIMARY KEY AUTOINCREMENT, supplies_name VARCHAR(25), amount INTEGER, treatment VARCHAR(9))',
                   []
                 );
               }
@@ -27,7 +27,7 @@ const TreatmentManagement = ({navigation}) => {
     
       const removeElementsOnDatabase = () => {
         db.transaction( (txn) => {
-          txn.executeSql('DELETE FROM treatment', []);
+          txn.executeSql('DELETE FROM supplies', []);
         });
       }
     return (
@@ -36,34 +36,34 @@ const TreatmentManagement = ({navigation}) => {
             <View style={styles.generalView}>
                 <ScrollView>
                    <CustomButtons
-                     title="Registro de Tratamiento"
+                     title="Registro de Insumos"
                      btnColor="#474747"
                      btnIcon="check"
-                     customPress={() => navigation.navigate("AddTreatment")}
+                     customPress={() => navigation.navigate("AddSupplies")}
                    />
                    <CustomButtons
-                     title="Ver Trataminetos"
+                     title="Ver Insumos"
                      btnColor="#474747"
                      btnIcon="search"
-                     customPress={() => navigation.navigate("ViewAllTreatments")}
+                     customPress={() => navigation.navigate("ViewAllSupplies")}
                    />
                    <CustomButtons
-                     title="Buscar Tratamiento"
+                     title="Buscar Insumos"
                      btnColor="#474747"
                      btnIcon="search-plus"
-                     customPress={() => navigation.navigate("SearchTreatment")}
+                     customPress={() => navigation.navigate("SearchSupplies")}
                    />
                    <CustomButtons
-                     title="Modificar Tratamiento"
+                     title="Modificar Insumos"
                      btnColor="#474747"
                      btnIcon="gear"
-                     customPress={() => navigation.navigate("UpdateTreatment")}
+                     customPress={() => navigation.navigate("UpdateSupplies")}
                    />
                    <CustomButtons
-                     title="Eliminar Tratamiento"
+                     title="Eliminar Insumos"
                      btnColor="#474747"
                      btnIcon="close"
-                     customPress={() => navigation.navigate("DeleteTreatment")}
+                     customPress={() => navigation.navigate("DeleteSupplies")}
                    />
                   
                 </ScrollView>
@@ -73,7 +73,7 @@ const TreatmentManagement = ({navigation}) => {
   )
 }
 
-export default TreatmentManagement
+export default SuppliesManagement
 
 const styles = StyleSheet.create({
     container: {

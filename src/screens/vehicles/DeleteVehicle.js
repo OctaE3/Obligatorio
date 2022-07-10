@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import { StyleSheet, View, SafeAreaView, Alert, KeyboardAvoidingView, ScrollView } from 'react-native'
-import CustomInputText from '../../components/CustomInputText'
 import CustomSingleButton from '../../components/CustomSingleButton'
 import CustomText from '../../components/CustomText'
 import DatabaseConnection from "../../database/database-connection";
+import VehicleDropDown from '../../components/VehicleDropDown';
 const db = DatabaseConnection.getConnection();
 
 
@@ -36,10 +36,10 @@ const DeleteVehicle = ({navigation}) => {
                 <ScrollView >
                     <CustomText text="Busqueda de vehiculo" style={styles.text}/>
                         <KeyboardAvoidingView style={styles.keyboardView}>
-                            <CustomInputText 
-                             placeholder="Matricula del Auto"
-                             onChangeText={(text) => setMatricula(text)}
-                            />
+                        <VehicleDropDown
+                             defaultButtonText={"Matricula"}
+                            onSelect={setMatricula}
+                             />
                             <CustomSingleButton title="Eliminar" customPress={deletevehicle} />
                         </KeyboardAvoidingView>
                 </ScrollView>

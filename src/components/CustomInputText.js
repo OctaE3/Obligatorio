@@ -18,6 +18,7 @@ const MyInputText = (props) => {
         multiline={props.multiline}
         onSubmitEditing={props.onSubmitEditing}
         style={styles.input}
+        onPressOut={props.onPressOut}
         blurOnSubmit={false}
         value={props.value}
         defaultValue={props.defaultValue}
