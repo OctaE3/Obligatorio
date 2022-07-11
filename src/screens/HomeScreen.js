@@ -39,6 +39,12 @@ const HomeScreen = ({navigation}) => {
               btnIcon="tint"
               customPress={() => navigation.navigate("SuppliesManagement")}
             />
+            <CustomButtons 
+              title="Estadisticas"
+              btnColor="#474747"
+              btnIcon="wpforms"
+              customPress={() => navigation.navigate("Stat")}
+            />
 
 
           </ScrollView>

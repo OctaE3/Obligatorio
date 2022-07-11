@@ -34,7 +34,7 @@ const UpdateTreatment = ({navigation}) => {
                 setVehicle(results.rows.item(0).vehicle);
                 setInDate(results.rows.item(0).inDate);
                 setFinDate(results.rows.item(0).finDate);
-                setPrice(results.rows.item(0).price);
+                setPrice(results.rows.item(0).price.toString());
               } else {
                 Alert.alert("Tratamiento no encontrado");
               }

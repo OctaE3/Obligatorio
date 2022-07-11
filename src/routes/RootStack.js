@@ -33,6 +33,7 @@ import DeleteSupplies from "../screens/supplies/DeleteSupplies";
 import SearchSupplies from "../screens/supplies/SearchSupplies";
 import UpdateSupplies from "../screens/supplies/UpdateSupplies";
 import ViewAllSupplies from "../screens/supplies/ViewAllSupplies";
+import Stat from "../screens/stats/stat";
 
 const Stack = createStackNavigator();
 
@@ -54,8 +55,23 @@ const RootStack = () => {
             },
           }}
         />
-        
-          {/* Usuarios */}
+          {/* Estadisticas */}
+        <Stack.Screen
+          name="Stat"
+          component={Stat}
+          options={{
+            title: "Estadisticas",
+            headerStyle: {
+              backgroundColor: "#474747",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+
+        {/* Usuarios */}
 
         <Stack.Screen
           name="UserManagement"
@@ -99,7 +115,7 @@ const RootStack = () => {
             },
           }}
         />
-               <Stack.Screen
+        <Stack.Screen
           name="SearchUser"
           component={SearchUser}
           options={{
@@ -127,7 +143,7 @@ const RootStack = () => {
             },
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="DeleteUser"
           component={DeleteUser}
           options={{
@@ -142,7 +158,7 @@ const RootStack = () => {
           }}
         />
 
-          {/* Vehiculos */}
+        {/* Vehiculos */}
 
         <Stack.Screen
           name="VehiclesManagement"
@@ -228,7 +244,7 @@ const RootStack = () => {
             },
           }}
         />
-        
+
         {/* Tratamientos*/}
 
         <Stack.Screen
@@ -244,7 +260,7 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        /> 
+        />
         <Stack.Screen
           name="AddTreatment"
           component={AddTreatment}
@@ -314,7 +330,7 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        />              
+        />
         {/* Repuestos*/}
         <Stack.Screen
           name="ReplacementManagement"
@@ -329,8 +345,8 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        /> 
-         <Stack.Screen
+        />
+        <Stack.Screen
           name="AddReplacement"
           component={AddReplacement}
           options={{
@@ -343,8 +359,8 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        /> 
-          <Stack.Screen
+        />
+        <Stack.Screen
           name="DeleteReplacement"
           component={DeleteReplacement}
           options={{
@@ -371,7 +387,7 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        />  
+        />
         <Stack.Screen
           name="UpdateReplacement"
           component={UpdateReplacement}
@@ -400,8 +416,8 @@ const RootStack = () => {
             },
           }}
         />
-          {/* Insumos*/}
-          <Stack.Screen
+        {/* Insumos*/}
+        <Stack.Screen
           name="SuppliesManagement"
           component={SuppliesManagement}
           options={{
@@ -428,7 +444,7 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        /> 
+        />
         <Stack.Screen
           name="DeleteSupplies"
           component={DeleteSupplies}
@@ -442,7 +458,7 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        /> 
+        />
         <Stack.Screen
           name="SearchSupplies"
           component={SearchSupplies}
@@ -456,7 +472,7 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        />  
+        />
         <Stack.Screen
           name="UpdateSupplies"
           component={UpdateSupplies}
@@ -470,7 +486,7 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        />  
+        />
         <Stack.Screen
           name="ViewAllSupplies"
           component={ViewAllSupplies}
@@ -484,7 +500,7 @@ const RootStack = () => {
               fontWeight: "bold",
             },
           }}
-        />  
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -18,7 +18,7 @@ const UpdateSupplies = ({navigation}) => {
     const searchSupplies = () => {
         console.log("searchSupplies");
     
-        if (!searchId.trim()) {
+        if (!searchId.toString().trim()) {
           Alert.alert("El codigo es requerido");
           return;
         }
@@ -30,7 +30,7 @@ const UpdateSupplies = ({navigation}) => {
             (tx, results) => {
               if (results.rows.length > 0) {
                 setName(results.rows.item(0).supplies_name);
-                setAmount(results.rows.item(0).amount);
+                setAmount(results.rows.item(0).amount.toString());
                 setTreatment(results.rows.item(0).treatment);
               } else {
                 Alert.alert("Insumo no encontrado");

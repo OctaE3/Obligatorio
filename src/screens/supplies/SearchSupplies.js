@@ -14,7 +14,7 @@ const SearchSupplies = ({navigation}) => {
         console.log("getData");
         setData({});
     
-        if (!id.trim()) {
+        if (!id.toString().trim()) {
           Alert.alert("La codigo es requerido");
           return;
         }  
