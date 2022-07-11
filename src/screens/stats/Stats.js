@@ -4,38 +4,39 @@ import CustomText from '../../components/CustomText';
 import DatabaseConnection from "../../database/database-connection";
 const db = DatabaseConnection.getConnection();
 
-const stat = ({navigation}) => {
-    const [stat, setStat] = useState([]);
-    const [replacement, setReplacement] = useState([]);
+const Stats = ({navigation}) => {
+    const [StatSi, setStatSi] = useState([]);
+    const [StatNo, setStatNo] = useState([]);
+    const Union = [].concat(StatSi,StatNo);
 
     useEffect(() => {
         db.transaction((tx) => {
-          tx.executeSql(`SELECT u.user_name, u.vehicle, t.treatment_id, t.inDate, t.price
-                         FROM users u, treatment t
-                         WHERE u.vehicle = t.vehicle`, [], (tx, results) => {
-            console.log("results", results);
-            if (results.rows.length > 0) {
-              var temp = [];
-              for (let i = 0; i < results.rows.length; ++i)
-                temp.push(results.rows.item(i));
-              setStat(temp);
-            } else {
-              Alert.alert(
-                "Mensaje",
-                "No hay Tratamiento, Usuarios y/o Repuestos!!!",
-                [
-                  {
-                    text: "Ok",
-                    onPress: () => navigation.navigate("Stat"),
-                  },
-                ],
-                { cancelable: false }
-              );
-            }
-            tx.executeSql(`SELECT `)
-            if ()
+            tx.executeSql(`SELECT u.user_name, u.vehicle, t.treatment_id, t.inDate, t.price, 'Si' As [replacement]
+                           FROM users u, treatment t
+                           WHERE u.vehicle = t.vehicle and t.treatment_id IN (SELECT DISTINCT treatment FROM replacement)`, [], (tx, results) => {
+              console.log("results", results);
+              if (results.rows.length > 0) {
+                var temp = [];
+                for (let i = 0; i < results.rows.length; ++i)
+                  temp.push(results.rows.item(i));
+                setStatSi(temp);
+              }
+            });  
           });
-        });
+          db.transaction((tx2) => {
+            tx2.executeSql(`SELECT u.user_name, u.vehicle, t.treatment_id, t.inDate, t.price, 'No' As [replacement]
+                           FROM users u, treatment t
+                           WHERE u.vehicle = t.vehicle and t.treatment_id NOT IN (SELECT DISTINCT treatment FROM replacement)`, [], (tx2, results2) => {
+            console.log("results", results2);
+            if (results2.rows.length > 0) {
+              var temp2 = [];
+              for (let i = 0; i < results2.rows.length; ++i)
+                temp2.push(results2.rows.item(i));
+              setStatNo(temp2);
+            } 
+            });
+          })
+          /*setUnion(StatSi, StatNo);*/
       }, []);
 
       const listItemView = (item) => {
@@ -52,6 +53,7 @@ const stat = ({navigation}) => {
                 <CustomText text="Precio" style={styles.text}/>
                 <CustomText text={item.price} style={styles.text}/>
                 <CustomText text="aaa" style={styles.text}/>
+                <CustomText text={item.replacement} style={styles.text}/>
             </View>
         );
     };
@@ -61,7 +63,7 @@ const stat = ({navigation}) => {
       <View>
           <FlatList
             contentContainerStyle={{ paddingHorizontal: 20 }}
-            data={stat}
+            data={Union}
             key={(index) => index.toString()}
             renderItem={({ item }) => listItemView(item)}
           />
@@ -70,7 +72,7 @@ const stat = ({navigation}) => {
   )
 }
 
-export default stat
+export default Stats
 
 const styles = StyleSheet.create({
     container: {

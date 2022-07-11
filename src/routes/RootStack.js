@@ -33,7 +33,7 @@ import DeleteSupplies from "../screens/supplies/DeleteSupplies";
 import SearchSupplies from "../screens/supplies/SearchSupplies";
 import UpdateSupplies from "../screens/supplies/UpdateSupplies";
 import ViewAllSupplies from "../screens/supplies/ViewAllSupplies";
-import Stat from "../screens/stats/stat";
+import Stat from "../screens/stats/Stats";
 
 const Stack = createStackNavigator();
 
