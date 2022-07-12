@@ -10,9 +10,66 @@ const db = DatabaseConnection.getConnection();
 
 const DeleteTreatment = ({navigation}) => {
     const [id, setId] = useState("");
+    const [name, setName] = useState("");
+    const [vehicle, setVehicle] = useState("");
+    const [inDate, setInDate] = useState("");
+    const [finDate, setFinDate] = useState("");
+    const [price, setPrice] = useState("");
+    const [incluido, setIncluido] = useState("");
+    const [incluidoR, setIncluidoR] = useState("");
 
-  const deleteTreatment = () => {
+    const SearchTreatment = () => {
+      if (!id.trim()) {
+        Alert.alert("La Id es requerida");
+        return;
+      }
+      console.log("searchTreatment");
+      db.transaction((tx) =>{
+        tx.executeSql(`SELECT treatment FROM replacement WHERE treatment = ?`,[id],      
+        (tx, results) => {
+          if (results.rows.length > 0) {
+            setIncluido("Si");
+          } else {
+            setIncluido("No");
+          }
+        }
+        );
+      });
+      db.transaction((tx) =>{
+        tx.executeSql(`SELECT treatment FROM supplies WHERE treatment = ?`,[id],      
+        (tx, results) => {
+          if (results.rows.length > 0) {
+            setIncluidoR("Si");
+          } else {
+            setIncluidoR("No");
+          }
+        }
+        );
+      });
+      db.transaction((tx) => {
+        tx.executeSql(
+          "SELECT * FROM treatment WHERE treatment_id = ?",
+          [id],
+          (tx, results) => {
+            if (results.rows.length > 0) {
+              setName(results.rows.item(0).treatment_name);
+              setVehicle(results.rows.item(0).vehicle);
+              setInDate(results.rows.item(0).inDate);
+              setFinDate(results.rows.item(0).finDate);
+              setPrice(results.rows.item(0).price.toString());
+            } else {
+              Alert.alert("Tratamiento no encontrado");
+            }
+          }
+        );
+      });
+    };
+  
+  
+  
+    const deleteTreatment = () => {
     console.log("deleteTreatment");
+    if(incluido == "No" && incluidoR == "No"){
     db.transaction((tx) => {
       tx.executeSql(
         `DELETE FROM treatment WHERE treatment_id = ?`,
@@ -28,6 +85,11 @@ const DeleteTreatment = ({navigation}) => {
         }
       );
     });
+  }
+  else
+  {
+    Alert.alert("Este tratamiento tiene asignados repeustos o isumos");
+  }
   };
 
   return (
@@ -41,6 +103,32 @@ const DeleteTreatment = ({navigation}) => {
                               defaultButtonText={"Tratamiento"}
                               onSelect={setId}
                             />                            
+                             <CustomSingleButton title="Buscar" customPress={SearchTreatment} />
+                <CustomInputText
+                  placeholder="Nombre de tartamiento"
+                  value={name}
+                  editable={false}
+                />
+               <CustomInputText
+                  placeholder="Matriula"
+                  value={vehicle}
+                  editable={false}
+                />
+                <CustomInputText
+                  placeholder="Fecha inicio"
+                  value={inDate}
+                  editable={false}
+                />  
+                <CustomInputText
+                  placeholder="Fecha final"
+                  value={finDate}
+                  editable={false}
+                />  
+                 <CustomInputText
+                  placeholder="Costo"
+                  value={price}
+                  editable={false}
+                />                
                             <CustomSingleButton title="Eliminar" customPress={deleteTreatment} />
                         </KeyboardAvoidingView>
                 </ScrollView>

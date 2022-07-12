@@ -13,6 +13,9 @@ const AddTreatment = ({ navigation }) => {
   const [inDate, setInDate] = useState('');
   const [finDate, setFinDate] = useState('');
   const [price, setPrice] = useState('');
+  const idRegex = /\bT-[0-9]{4}\b/;
+  const dateRegex = /\b[0-9]{2}-[0-9]{2}-[0-9]{4}\b/;
+
 
   const clearData = () => {
     setId("");
@@ -25,8 +28,8 @@ const AddTreatment = ({ navigation }) => {
 
   const addTreatment = () => {
     console.log("state", id, name, vehicle, inDate, finDate, price)
-    if (!id.trim()) {
-      Alert.alert("Ingrese codigo");
+    if (!idRegex.test(id)) {
+      Alert.alert("Codigo no valido");
       return;
     }
     if (!name.trim()) {
@@ -37,12 +40,12 @@ const AddTreatment = ({ navigation }) => {
       Alert.alert("Ingrese matricula");
       return;
     }
-    if (!inDate.trim()) {
-      Alert.alert("Ingrese fecha inicio");
+    if (!dateRegex.test(inDate)) {
+      Alert.alert("Ingrese fecha inicio valida");
       return;
     }
-    if (!finDate.trim()) {
-      Alert.alert("Ingrese fecha final");
+    if (!dateRegex.test(finDate)) {
+      Alert.alert("Ingrese fecha final valida");
       return;
     }
     if (!price.trim()) {
@@ -83,7 +86,7 @@ const AddTreatment = ({ navigation }) => {
           <ScrollView>
             <KeyboardAvoidingView style={styles.keyboardView}>
             <CustomInputText
-                placeholder="Codigo Tratamiento"
+                placeholder="Codigo Tratamiento(T-1234)"
                 onChangeText={setId}
                 style={styles.Input}
                 value={id}
@@ -99,14 +102,16 @@ const AddTreatment = ({ navigation }) => {
                onSelect={setVehicle}
               />
               <CustomInputText
-                placeholder="Fecha inicio"
+                placeholder="Fecha inicio (01-01-0001)"
                 onChangeText={setInDate}
+                keyboardType="number-pad"
                 style={styles.Input}
                 value={inDate}
               />
               <CustomInputText
-                placeholder="Fecha final"
+                placeholder="Fecha final (01-01-0001)"
                 onChangeText={setFinDate}
+                keyboardType="number-pad"
                 style={styles.Input}
                 value={finDate}
               />

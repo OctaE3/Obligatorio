@@ -84,6 +84,7 @@ const UpdateReplacement = ({navigation}) => {
                 <CustomInputText
                   placeholder="Ingrese la cantidad"
                   value={amount}
+                  keyboardType="number-pad"
                   onChangeText={(text) => setAmount(text)}
                 />               
                <TreatmentDropDown

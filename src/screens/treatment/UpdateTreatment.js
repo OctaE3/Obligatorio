@@ -5,6 +5,7 @@ import CustomSingleButton from '../../components/CustomSingleButton'
 import CustomText from '../../components/CustomText'
 import DatabaseConnection from "../../database/database-connection";
 import VehicleDropDown from '../../components/VehicleDropDown'
+import TreatmentDropDown from '../../components/TreatmentDropDown'
 const db = DatabaseConnection.getConnection();
 
 
@@ -15,6 +16,8 @@ const UpdateTreatment = ({navigation}) => {
     const [inDate, setInDate] = useState("");
     const [finDate, setFinDate] = useState("");
     const [price, setPrice] = useState("");
+    const idRegex = /\bT-[0-9]{4}\b/;
+    const dateRegex = /\b[0-9]{2}-[0-9]{2}-[0-9]{4}\b/;
   
     const SearchTreatment = () => {
         console.log("searchTreatment");
@@ -50,7 +53,18 @@ const UpdateTreatment = ({navigation}) => {
           Alert.alert("Faltan datos");
           return;
         }
-    
+        if (!idRegex.test(id)) {
+          Alert.alert("Codigo no valido");
+          return;
+        }
+        if (!dateRegex.test(inDate)) {
+          Alert.alert("Ingrese fecha inicio valida");
+          return;
+        }
+        if (!dateRegex.test(finDate)) {
+          Alert.alert("Ingrese fecha final valida");
+          return;
+        }
         db.transaction((tx) => {
           tx.executeSql(
             "UPDATE treatment SET treatment_name = ?, vehicle = ?, inDate = ?, finDate = ?, price = ?  WHERE treatment_id = ?",
@@ -74,11 +88,10 @@ const UpdateTreatment = ({navigation}) => {
             <ScrollView keyboardShouldPersistTaps="handled">
               <KeyboardAvoidingView behavior="padding" style={styles.keyboardView}>
                 <CustomText text="Buscar tratamiento" style={styles.text}/>
-                <CustomInputText
-                  placeholder="Id"
-                  style={styles.inputStyle}
-                  onChangeText={(text) => setSearchId(text)}
-                />
+                <TreatmentDropDown 
+                              defaultButtonText={"Tratamiento"}
+                              onSelect={setSearchId}
+                            />   
                 <CustomSingleButton title="Buscar" customPress={SearchTreatment} />
                 <CustomInputText
                   placeholder="Ingrese nombre de tartamiento"
@@ -91,18 +104,21 @@ const UpdateTreatment = ({navigation}) => {
                defaultValue={vehicle}
               />
                 <CustomInputText
-                  placeholder="Ingrese fecha inicio"
+                  placeholder="Ingrese fecha inicio (01-01-0001)"
                   value={inDate}
+                  keyboardType="number-pad"
                   onChangeText={(text) => setInDate(text)}
                 />  
                 <CustomInputText
-                  placeholder="Ingrese fecha final"
+                  placeholder="Ingrese fecha final (01-01-0001)"
                   value={finDate}
+                  keyboardType="number-pad"
                   onChangeText={(text) => setFinDate(text)}
                 />  
                  <CustomInputText
                   placeholder="Ingrese costo"
                   value={price}
+                  keyboardType="number-pad"
                   onChangeText={(text) => setPrice(text)}
                 />  
                 <CustomSingleButton title="Modificar" customPress={updateTreatment} />

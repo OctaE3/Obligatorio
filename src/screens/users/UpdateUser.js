@@ -15,7 +15,8 @@ const UpdateUser = ({navigation}) => {
     const [userSurname, setUserSurname] = useState("");
     const [ci, setCi] = useState("");
     const [vehicle, setVehicle] = useState("");
-  
+    const ciRegex = /\b[1-9]{1}.[0-9]{3}.[0-9]{3}-[0-9]{1}\b/;
+
     const searchUser = () => {
         console.log("searchUser");
     
@@ -49,7 +50,10 @@ const UpdateUser = ({navigation}) => {
           Alert.alert("Faltan datos");
           return;
         }
-    
+        if (!ciRegex.test(ci)) {
+          Alert.alert("Cedula invalida");
+          return;
+        }
         db.transaction((tx) => {
           tx.executeSql(
             "UPDATE users SET user_name = ?, user_surname = ?, ci = ?, vehicle = ? WHERE ci = ?",
@@ -91,13 +95,14 @@ const UpdateUser = ({navigation}) => {
                 <CustomInputText
                   placeholder="Ingrese la cedula"
                   value={ci}
+                  keyboardType="number-pad"
                   onChangeText={(text) => setCi(text)}
                 />                 
-               <VehicleDropDown
-               defaultButtonText={"Matricula"}
-               onSelect={setVehicle}
-               defaultValue={vehicle}
-              />
+               <CustomInputText
+                  placeholder="Matricula"
+                  value={vehicle}
+                  editable={false}
+                /> 
                 <CustomSingleButton title="Modificar" customPress={updateUser} />
               </KeyboardAvoidingView>
             </ScrollView>

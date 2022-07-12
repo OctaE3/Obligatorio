@@ -3,7 +3,7 @@ import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert
 import CustomInputText from '../../components/CustomInputText';
 import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from '../../database/database-connection';
-import VehicleDropDown from '../../components/VehicleDropDown';
+import VehicleDropDown from '../../components/NotUsedVehicleDropDown';
 const db = DatabaseConnection.getConnection();
 
 const RegisterUser = ({ navigation }) => {
@@ -12,6 +12,7 @@ const RegisterUser = ({ navigation }) => {
   const [ci, setCi] = useState('');
   const [vehicle, setVehicle] = useState('');
   const ciRegex = /\b[1-9]{1}.[0-9]{3}.[0-9]{3}-[0-9]{1}\b/;
+  
 
   const clearData = () => {
     setUserName("");

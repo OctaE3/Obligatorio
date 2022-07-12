@@ -4,12 +4,42 @@ import CustomSingleButton from '../../components/CustomSingleButton'
 import CustomText from '../../components/CustomText'
 import DatabaseConnection from "../../database/database-connection";
 import SuppliesDropDown from '../../components/SuppliesDropDown';
+import CustomInputText from '../../components/CustomInputText'
 const db = DatabaseConnection.getConnection();
 
 
 const DeleteSupplies = ({navigation}) => {
     const [id, setId] = useState("");
+    const [name, setName] = useState("");
+    const [amount, setAmount] = useState("");
+    const [treatment, setTreatment] = useState("");
 
+    const searchSupplies = () => {
+      console.log("searchSupplies");
+  
+      if (!id.toString().trim()) {
+        Alert.alert("El codigo es requerido");
+        return;
+      }
+  
+      db.transaction((tx) => {
+        tx.executeSql(
+          "SELECT * FROM supplies WHERE supplies_id = ?",
+          [id],
+          (tx, results) => {
+            if (results.rows.length > 0) {
+              setName(results.rows.item(0).supplies_name);
+              setAmount(results.rows.item(0).amount.toString());
+              setTreatment(results.rows.item(0).treatment);
+            } else {
+              Alert.alert("Insumo no encontrado");
+            }
+          }
+        );
+      });
+    };
+
+    
   const deleteSupplies = () => {
     console.log("deleteSupplies");
     db.transaction((tx) => {
@@ -41,6 +71,22 @@ const DeleteSupplies = ({navigation}) => {
                                 defaultButtonText={"Codigo"}
                                 onSelect={setId}
                             />
+                             <CustomSingleButton title="Buscar" customPress={searchSupplies} />
+                <CustomInputText
+                  placeholder="Nombre de insumo"
+                  value={name}
+                  editable={false}
+                />
+                <CustomInputText
+                  placeholder="Cantidad"
+                  value={amount}
+                  editable={false}
+                /> 
+                 <CustomInputText
+                  placeholder="Tratamiento"
+                  value={treatment}
+                  editable={false}
+                />
                             <CustomSingleButton title="Eliminar" customPress={deleteSupplies} />
                         </KeyboardAvoidingView>
                 </ScrollView>

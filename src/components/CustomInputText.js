@@ -22,6 +22,7 @@ const MyInputText = (props) => {
         blurOnSubmit={false}
         value={props.value}
         defaultValue={props.defaultValue}
+        editable={props.editable}
       />
     </View>
   );

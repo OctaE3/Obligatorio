@@ -14,7 +14,9 @@ const UpdateVehicle = ({navigation}) => {
     const [marca, setMarca] = useState("");
     const [color, setColor] = useState("");
     const [serial, setSerial] = useState("");
-  
+    const matriculaRegex = /\b[A-Z]{3}\d{4}\b/;
+    const serialRegex = /\b([A-Z0-9]){17}\b/;
+
     const SearchVehicle = () => {
         console.log("searchVehicle");
     
@@ -48,7 +50,14 @@ const UpdateVehicle = ({navigation}) => {
           Alert.alert("Faltan datos");
           return;
         }
-    
+        if(!matriculaRegex.test(matricula)){
+          Alert.alert("Matricula invalida")
+          return;
+        } 
+        if (!serialRegex.test(serial)) {
+          Alert.alert("Serial del Motor invalida");
+          return;
+        }
         db.transaction((tx) => {
           tx.executeSql(
             "UPDATE vehicle SET matricula = ?, marca = ?, color = ?, serial = ? WHERE matricula = ?",

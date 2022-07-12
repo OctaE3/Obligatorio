@@ -4,6 +4,7 @@ import CustomText from '../../components/CustomText';
 import CustomInputText from '../../components/CustomInputText';
 import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from "../../database/database-connection";
+import TreatmentDropDown from '../../components/TreatmentDropDown'
 const db = DatabaseConnection.getConnection();
 
 const SearchTreatment = ({navigation}) => {
@@ -40,11 +41,10 @@ const SearchTreatment = ({navigation}) => {
                 <ScrollView>
                 <KeyboardAvoidingView style={styles.keyboardView}>
                     <CustomText  text="Filtro de tratamientos" style={styles.text}/>
-                    <CustomInputText
-                     style={styles.inputStyle}
-                     placeholder="Id"
-                     onChangeText={(text) => setId(text)}
-                    />
+                    <TreatmentDropDown 
+                              defaultButtonText={"Tratamiento"}
+                              onSelect={setId}
+                            />   
                     <CustomSingleButton title="Buscar" customPress={getTreatmentData}/>
                     <View style={styles.presenterView}>
                         <CustomText text={`Nombre: ${!treatmentData ? '' : treatmentData.treatment_name}`} style={styles.presenterText}/>

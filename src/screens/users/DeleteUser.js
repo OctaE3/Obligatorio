@@ -10,6 +10,35 @@ const db = DatabaseConnection.getConnection();
 
 const DeleteUser = ({navigation}) => {
     const [userCi, setUserCi] = useState("");
+    const [userName, setUserName] = useState("");
+    const [userSurname, setUserSurname] = useState("");
+    const [vehicle, setVehicle] = useState("");
+
+    const searchUser = () => {
+      console.log("searchUser");
+  
+      if (!userCi.trim()) {
+        Alert.alert("La cedula es requerida");
+        return;
+      }
+  
+      db.transaction((tx) => {
+        tx.executeSql(
+          "SELECT * FROM users WHERE ci = ?",
+          [userCi],
+          (tx, results) => {
+            if (results.rows.length > 0) {
+              setUserName(results.rows.item(0).user_name);
+              setUserSurname(results.rows.item(0).user_surname);
+              setVehicle(results.rows.item(0).vehicle);
+            } else {
+              Alert.alert("Usuario no encontrado");
+            }
+          }
+        );
+      });
+    };
+
 
   const deleteUser = () => {
     console.log("deleteUser");
@@ -42,6 +71,22 @@ const DeleteUser = ({navigation}) => {
                                 defaultButtonText={"Cedula"}
                                 onSelect={setUserCi}
                             />
+                            <CustomSingleButton title="Buscar" customPress={searchUser} />
+                <CustomInputText
+                  placeholder="Nombre de Usuario"
+                  value={userName}
+                  editable={false}
+                />
+                <CustomInputText
+                  placeholder="Apellido"
+                  value={userSurname}
+                  editable={false}
+                />                
+              <CustomInputText
+                  placeholder="Matricula"
+                  value={vehicle}
+                  editable={false}
+                />  
                             <CustomSingleButton title="Eliminar" customPress={deleteUser} />
                         </KeyboardAvoidingView>
                 </ScrollView>
