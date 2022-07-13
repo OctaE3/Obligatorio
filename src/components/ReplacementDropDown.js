@@ -1,11 +1,10 @@
-import react from "react";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text} from 'react-native'
+import { StyleSheet, View, SafeAreaView, Alert} from 'react-native';
 import SelectDropdown from "react-native-select-dropdown";
 import DatabaseConnection from '../database/database-connection';
 const db = DatabaseConnection.getConnection();
 
-const ReplacementDropDown = (props, {navigation}) => {
+const ReplacementDropDown = (props) => {
     const [replacement, setReplacement] = useState([]);
     
     useEffect(() => {
@@ -24,7 +23,6 @@ const ReplacementDropDown = (props, {navigation}) => {
                 [
                   {
                     text: "Ok",
-                    onPress: () => navigation.navigate("ReplacementManagement"),
                   },
                 ],
                 { cancelable: false }
@@ -36,6 +34,8 @@ const ReplacementDropDown = (props, {navigation}) => {
 
 
     return (
+      <SafeAreaView>
+        <View>
       <SelectDropdown
 	data={replacement.map(replacement => replacement.replacement_id)}
   onSelect={props.onSelect}
@@ -49,10 +49,12 @@ const ReplacementDropDown = (props, {navigation}) => {
 		return item
 	}}
 />
-  )
-}
+</View>
+</SafeAreaView>
+  );
+};
 
-export default ReplacementDropDown
+export default ReplacementDropDown;
 
 const styles = StyleSheet.create({
   btn:{

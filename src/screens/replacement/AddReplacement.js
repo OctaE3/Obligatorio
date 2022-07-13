@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert} from 'react-native'
+import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert } from 'react-native'
 import CustomInputText from '../../components/CustomInputText';
 import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from '../../database/database-connection';
@@ -16,8 +16,8 @@ const AddReplacement = ({ navigation }) => {
     setAmount("");
     setTreatment("");
   };
-
   const addReplacement = () => {
+    //Comprueba que no falten datos
     console.log("state", name, amount, treatment)
     if (!name.trim()) {
       Alert.alert("Ingrese la nombre");
@@ -31,12 +31,14 @@ const AddReplacement = ({ navigation }) => {
       Alert.alert("Ingrese el tratamiento");
       return;
     }
+    //Inserta los datos en la base mediante una consulta sql
     db.transaction((tx) => {
       tx.executeSql(
         `INSERT INTO replacement(replacement_name, amount, treatment) VALUES (?, ?, ?)`,
         [name, amount, treatment],
         (tx, results) => {
           console.log("results", results);
+          //validar resultado
           if (results.rowsAffected > 0) {
             clearData();
             Alert.alert(
@@ -77,10 +79,10 @@ const AddReplacement = ({ navigation }) => {
                 style={styles.Input}
                 value={amount}
               />
-             <TreatmentDropDown
-             defaultButtonText={"Tratamiento"}
-             onSelect={setTreatment}
-             />
+              <TreatmentDropDown
+                defaultButtonText={"Tratamiento"}
+                onSelect={setTreatment}
+              />
               <CustomSingleButton
                 title="Registrar"
                 customPress={addReplacement}

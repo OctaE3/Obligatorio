@@ -16,7 +16,7 @@ export default MySingleButton
 const styles = StyleSheet.create({
     button: {
         alignContent: 'center',
-        backgroundColor: 'black',
+        backgroundColor: '#AD6FD6',
         color: '#ffffff',
         padding: 20,
         marginTop: 15,

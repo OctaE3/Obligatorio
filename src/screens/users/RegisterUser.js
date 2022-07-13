@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert} from 'react-native'
+import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert } from 'react-native'
 import CustomInputText from '../../components/CustomInputText';
 import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from '../../database/database-connection';
@@ -11,8 +11,9 @@ const RegisterUser = ({ navigation }) => {
   const [userSurname, setUserSurname] = useState('');
   const [ci, setCi] = useState('');
   const [vehicle, setVehicle] = useState('');
+  //Da formato a la cedula
   const ciRegex = /\b[1-9]{1}.[0-9]{3}.[0-9]{3}-[0-9]{1}\b/;
-  
+
 
   const clearData = () => {
     setUserName("");
@@ -22,6 +23,7 @@ const RegisterUser = ({ navigation }) => {
   };
 
   const registerUser = () => {
+    //Verifica que esten todos los datos
     console.log("state", userName, userSurname, ci, vehicle)
     debugger;
     if (!userName.trim()) {
@@ -40,6 +42,7 @@ const RegisterUser = ({ navigation }) => {
       Alert.alert("Ingrese la matricula de su vehiculo");
       return;
     }
+    //Inserta en la tabla usuarios mediante una consulta SQL
     db.transaction((tx) => {
       tx.executeSql(
         `INSERT INTO users (user_name, user_surname, ci, vehicle) VALUES (?, ?, ?,?)`,
@@ -94,8 +97,8 @@ const RegisterUser = ({ navigation }) => {
                 value={ci}
               />
               <VehicleDropDown
-               defaultButtonText={"Matricula"}
-               onSelect={setVehicle}
+                defaultButtonText={"Matricula"}
+                onSelect={setVehicle}
               />
               <CustomSingleButton
                 title="Registrar"

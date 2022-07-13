@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text} from 'react-native'
+import { StyleSheet, View, SafeAreaView, Alert} from 'react-native';
 import SelectDropdown from "react-native-select-dropdown";
 import DatabaseConnection from '../database/database-connection';
 const db = DatabaseConnection.getConnection();
 
-const TreatmentDropDown = (props, {navigation}) => {
+const TreatmentDropDown = (props) => {
     const [treatment, setTreatment] = useState([]);
     
     useEffect(() => {
@@ -23,7 +23,6 @@ const TreatmentDropDown = (props, {navigation}) => {
               [
                 {
                   text: "Ok",
-                  onPress: () => navigation.navigate("TreatmentManagement"),
                 },
               ],
               { cancelable: false }
@@ -35,6 +34,8 @@ const TreatmentDropDown = (props, {navigation}) => {
 
 
     return (
+  <SafeAreaView> 
+  <View>
       <SelectDropdown
 	data={treatment.map(treatment => treatment.treatment_id)}
   onSelect={props.onSelect}
@@ -48,10 +49,12 @@ const TreatmentDropDown = (props, {navigation}) => {
 		return item
 	}}
 />
-  )
-}
+</View>
+</SafeAreaView>
+  );
+};
 
-export default TreatmentDropDown
+export default TreatmentDropDown;
 
 const styles = StyleSheet.create({
   btn:{

@@ -8,9 +8,11 @@ const ViewAllVehicles = ({navigation}) => {
     const [vehiculos, setVehiculos] = useState([]);
     
     useEffect(() => {
+      //Selecciona mediante una consulta SQL
         db.transaction((tx) => {
           tx.executeSql(`SELECT * FROM vehicle`, [], (tx, results) => {
             console.log("results", results);
+              //Verifica Resultado y los carga
             if (results.rows.length > 0) {
               var temp = [];
               for (let i = 0; i < results.rows.length; ++i)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert} from 'react-native'
+import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert } from 'react-native'
 import CustomInputText from '../../components/CustomInputText';
 import CustomSingleButton from '../../components/CustomSingleButton';
 import DatabaseConnection from '../../database/database-connection';
@@ -18,6 +18,7 @@ const AddSupplies = ({ navigation }) => {
   };
 
   const addSupplies = () => {
+    //Verifica que esten todos los datos
     console.log("state", name, amount, treatment)
     debugger;
     if (!name.trim()) {
@@ -32,12 +33,14 @@ const AddSupplies = ({ navigation }) => {
       Alert.alert("Ingrese el tratamiento");
       return;
     }
+    //Inserta en la tabla insumos mediante una consulta SQL
     db.transaction((tx) => {
       tx.executeSql(
         `INSERT INTO supplies(supplies_name, amount, treatment) VALUES (?, ?, ?)`,
         [name, amount, treatment],
         (tx, results) => {
           console.log("results", results);
+          //Verificar resultado
           if (results.rowsAffected > 0) {
             clearData();
             Alert.alert(
@@ -78,10 +81,10 @@ const AddSupplies = ({ navigation }) => {
                 style={styles.Input}
                 value={amount}
               />
-             <TreatmentDropDown
-             defaultButtonText={"Tratamiento"}
-             onSelect={setTreatment}
-             />
+              <TreatmentDropDown
+                defaultButtonText={"Tratamiento"}
+                onSelect={setTreatment}
+              />
               <CustomSingleButton
                 title="Registrar"
                 customPress={addSupplies}

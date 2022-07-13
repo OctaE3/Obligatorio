@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text} from 'react-native'
+import { StyleSheet, View, SafeAreaView, Alert} from 'react-native';
 import SelectDropdown from "react-native-select-dropdown";
 import DatabaseConnection from '../database/database-connection';
 const db = DatabaseConnection.getConnection();
 
-const NotUsedVehicleDropDown = (props, {navigation}) => {
+const NotUsedVehicleDropDown = (props) => {
     const [vehiculos, setVehiculos] = useState([]);
     
     useEffect(() => {
@@ -23,7 +23,6 @@ const NotUsedVehicleDropDown = (props, {navigation}) => {
               [
                 {
                   text: "Ok",
-                  onPress: () => navigation.navigate("VehiclesManagement"),
                 },
               ],
               { cancelable: false }
@@ -35,6 +34,8 @@ const NotUsedVehicleDropDown = (props, {navigation}) => {
 
 
     return (
+<SafeAreaView>
+<View>
       <SelectDropdown
 	data={vehiculos.map(vehiculos => vehiculos.matricula)}
   onSelect={props.onSelect}
@@ -48,10 +49,12 @@ const NotUsedVehicleDropDown = (props, {navigation}) => {
 		return item
 	}}
 />
-  )
-}
+</View>
+</SafeAreaView>
+  );
+};
 
-export default NotUsedVehicleDropDown
+export default NotUsedVehicleDropDown;
 
 const styles = StyleSheet.create({
   btn:{

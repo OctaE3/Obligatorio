@@ -13,6 +13,7 @@ const AddTreatment = ({ navigation }) => {
   const [inDate, setInDate] = useState('');
   const [finDate, setFinDate] = useState('');
   const [price, setPrice] = useState('');
+  //Da formato a el codigo y las fechas
   const idRegex = /\bT-[0-9]{4}\b/;
   const dateRegex = /\b[0-9]{2}-[0-9]{2}-[0-9]{4}\b/;
 
@@ -27,6 +28,7 @@ const AddTreatment = ({ navigation }) => {
   };
 
   const addTreatment = () => {
+    //Verifica que esten todos los datos
     console.log("state", id, name, vehicle, inDate, finDate, price)
     if (!idRegex.test(id)) {
       Alert.alert("Codigo no valido");
@@ -52,12 +54,14 @@ const AddTreatment = ({ navigation }) => {
       Alert.alert("Ingrese precio");
       return;
     }
+    //Inserta en la tabla tratamientos mediante una consulta SQL
     db.transaction((tx) => {
       tx.executeSql(
         `INSERT INTO treatment (treatment_id, treatment_name, vehicle, inDate, finDate, price) VALUES (?, ?, ?, ?, ?, ?)`,
         [id, name, vehicle, inDate, finDate, price],
         (tx, results) => {
           console.log("results", results);
+          //Verificar resultado
           if (results.rowsAffected > 0) {
             clearData();
             Alert.alert(
@@ -85,7 +89,7 @@ const AddTreatment = ({ navigation }) => {
         <View style={styles.generalView}>
           <ScrollView>
             <KeyboardAvoidingView style={styles.keyboardView}>
-            <CustomInputText
+              <CustomInputText
                 placeholder="Codigo Tratamiento(T-1234)"
                 onChangeText={setId}
                 style={styles.Input}
@@ -98,8 +102,8 @@ const AddTreatment = ({ navigation }) => {
                 value={name}
               />
               <VehicleDropDown
-               defaultButtonText={"Matricula"}
-               onSelect={setVehicle}
+                defaultButtonText={"Matricula"}
+                onSelect={setVehicle}
               />
               <CustomInputText
                 placeholder="Fecha inicio (01-01-0001)"
@@ -115,7 +119,7 @@ const AddTreatment = ({ navigation }) => {
                 style={styles.Input}
                 value={finDate}
               />
-                <CustomInputText
+              <CustomInputText
                 placeholder="Costo"
                 onChangeText={setPrice}
                 keyboardType="number-pad"

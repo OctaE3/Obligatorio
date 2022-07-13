@@ -11,37 +11,37 @@ const HomeScreen = ({navigation}) => {
           <ScrollView>
             <CustomButtons 
               title="Zona usuarios"
-              btnColor="#474747"
+              btnColor="#AD6FD6"
               btnIcon="user"
               customPress={() => navigation.navigate("UserManagement")}
             />
             <CustomButtons 
               title="Zona vehiculos"
-              btnColor="#474747"
+              btnColor="#AD6FD6"
               btnIcon="car"
               customPress={() => navigation.navigate("VehiclesManagement")}
             />
             <CustomButtons 
               title="Zona tratamientos"
-              btnColor="#474747"
+              btnColor="#AD6FD6"
               btnIcon="wrench"
               customPress={() => navigation.navigate("TreatmentManagement")}
             />
             <CustomButtons 
               title="Zona Repuestos"
-              btnColor="#474747"
+              btnColor="#AD6FD6"
               btnIcon="gear"
               customPress={() => navigation.navigate("ReplacementManagement")}
             />
              <CustomButtons 
               title="Zona Insumos"
-              btnColor="#474747"
+              btnColor="#AD6FD6"
               btnIcon="tint"
               customPress={() => navigation.navigate("SuppliesManagement")}
             />
             <CustomButtons 
               title="Estadisticas"
-              btnColor="#474747"
+              btnColor="#AD6FD6"
               btnIcon="wpforms"
               customPress={() => navigation.navigate("Stat")}
             />
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   viewContainer: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "#fff",
   },
   generalView: {
     flex: 1,

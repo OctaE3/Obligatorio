@@ -10,6 +10,7 @@ const AddVehicle = ({ navigation }) => {
   const [marca, setMarca] = useState('');
   const [color, setColor] = useState('');
   const [serial, setSerial] = useState('');
+  //Da formato a la matricula y la serial del motor
   const matriculaRegex = /\b[A-Z]{3}\d{4}\b/;
   const serialRegex = /\b([A-Z0-9]){17}\b/;
 
@@ -19,14 +20,15 @@ const AddVehicle = ({ navigation }) => {
     setColor("");
     setSerial("");
   };
- 
+
   const addvehicle = () => {
+    //Verifica que esten todos los datos
     console.log("state", matricula, marca, color, serial)
     debugger;
-    if(!matriculaRegex.test(matricula)){
+    if (!matriculaRegex.test(matricula)) {
       Alert.alert("Matricula invalida")
       return;
-    }    
+    }
     if (!marca.trim()) {
       Alert.alert("Ingrese la Marca");
       return;
@@ -39,12 +41,14 @@ const AddVehicle = ({ navigation }) => {
       Alert.alert("Serial del Motor invalida");
       return;
     }
+    //Inserta en la tabla vehiculos mediante una consulta SQL
     db.transaction((tx) => {
       tx.executeSql(
         `INSERT INTO vehicle (matricula, marca, color, serial) VALUES (?, ?, ?,?)`,
         [matricula, marca, color, serial],
         (tx, results) => {
           console.log("results", results);
+          //Verificar resultado
           if (results.rowsAffected > 0) {
             clearData();
             Alert.alert(
@@ -78,7 +82,7 @@ const AddVehicle = ({ navigation }) => {
                 style={styles.Input}
                 value={matricula}
               />
-              
+
               <CustomInputText
                 placeholder="Marca"
                 onChangeText={setMarca}

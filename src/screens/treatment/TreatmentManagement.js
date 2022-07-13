@@ -4,7 +4,7 @@ import CustomButtons from "../../components/CustomButtons";
 import DatabaseConnection from '../../database/database-connection';
 const db = DatabaseConnection.getConnection();
 
-
+//Creacion de la tabla de tratamientos
 const TreatmentManagement = ({navigation}) => {
     useEffect(() => {
         db.transaction( (txn) => {
@@ -37,31 +37,31 @@ const TreatmentManagement = ({navigation}) => {
                 <ScrollView>
                    <CustomButtons
                      title="Registro de Tratamiento"
-                     btnColor="#474747"
+                     btnColor="#AD6FD6"
                      btnIcon="check"
                      customPress={() => navigation.navigate("AddTreatment")}
                    />
                    <CustomButtons
                      title="Ver Trataminetos"
-                     btnColor="#474747"
+                     btnColor="#AD6FD6"
                      btnIcon="search"
                      customPress={() => navigation.navigate("ViewAllTreatments")}
                    />
                    <CustomButtons
                      title="Buscar Tratamiento"
-                     btnColor="#474747"
+                     btnColor="#AD6FD6"
                      btnIcon="search-plus"
                      customPress={() => navigation.navigate("SearchTreatment")}
                    />
                    <CustomButtons
                      title="Modificar Tratamiento"
-                     btnColor="#474747"
+                     btnColor="#AD6FD6"
                      btnIcon="gear"
                      customPress={() => navigation.navigate("UpdateTreatment")}
                    />
                    <CustomButtons
                      title="Eliminar Tratamiento"
-                     btnColor="#474747"
+                     btnColor="#AD6FD6"
                      btnIcon="close"
                      customPress={() => navigation.navigate("DeleteTreatment")}
                    />
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
       },
       viewContainer: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "white",
       },
       generalView: {
         flex: 1,

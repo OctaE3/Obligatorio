@@ -47,7 +47,7 @@ const RootStack = () => {
           options={{
             title: "Home",
             headerStyle: {
-              backgroundColor: "#474747",
+            backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -62,7 +62,7 @@ const RootStack = () => {
           options={{
             title: "Estadisticas",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -79,7 +79,7 @@ const RootStack = () => {
           options={{
             title: "Gestión de usuarios",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -93,7 +93,7 @@ const RootStack = () => {
           options={{
             title: "Registrar",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -107,7 +107,7 @@ const RootStack = () => {
           options={{
             title: "Lista de usuarios",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -121,7 +121,7 @@ const RootStack = () => {
           options={{
             title: "Buscar vehiculo",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -135,7 +135,7 @@ const RootStack = () => {
           options={{
             title: "Modificar usuarios",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -149,7 +149,7 @@ const RootStack = () => {
           options={{
             title: "Eliminar usuarios",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -166,7 +166,7 @@ const RootStack = () => {
           options={{
             title: "Gestión de vehiculos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -180,7 +180,7 @@ const RootStack = () => {
           options={{
             title: "Añadir Vehiculos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -194,7 +194,7 @@ const RootStack = () => {
           options={{
             title: "Lista de Vehiculos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -208,7 +208,7 @@ const RootStack = () => {
           options={{
             title: "Buscar vehiculo",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -222,7 +222,7 @@ const RootStack = () => {
           options={{
             title: "Modificar Vehiculos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -236,7 +236,7 @@ const RootStack = () => {
           options={{
             title: "Eliminar Vehiculos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -253,7 +253,7 @@ const RootStack = () => {
           options={{
             title: "Gestión de tratamientos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -267,7 +267,7 @@ const RootStack = () => {
           options={{
             title: "Añadir Tratamiento",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -281,7 +281,7 @@ const RootStack = () => {
           options={{
             title: "Lista de Tratamientos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -295,7 +295,7 @@ const RootStack = () => {
           options={{
             title: "Buscar tratamiento",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -309,7 +309,7 @@ const RootStack = () => {
           options={{
             title: "Modificar Tratamiento",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -323,7 +323,7 @@ const RootStack = () => {
           options={{
             title: "Eliminar tratamiento",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -338,7 +338,7 @@ const RootStack = () => {
           options={{
             title: "Gestión de repuestos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -352,7 +352,7 @@ const RootStack = () => {
           options={{
             title: "Agregar Repuestos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -366,7 +366,7 @@ const RootStack = () => {
           options={{
             title: "Borrar Repuestos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -380,7 +380,7 @@ const RootStack = () => {
           options={{
             title: "Buscar Repuestos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -394,7 +394,7 @@ const RootStack = () => {
           options={{
             title: "Modificar Repuestos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -408,7 +408,7 @@ const RootStack = () => {
           options={{
             title: "Ver Repuestos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -423,7 +423,7 @@ const RootStack = () => {
           options={{
             title: "Gestión de insumos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -437,7 +437,7 @@ const RootStack = () => {
           options={{
             title: "Agregar insumos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -451,7 +451,7 @@ const RootStack = () => {
           options={{
             title: "Eliminar insumos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -465,7 +465,7 @@ const RootStack = () => {
           options={{
             title: "Buscar insumos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -479,7 +479,7 @@ const RootStack = () => {
           options={{
             title: "Modificar insumos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
@@ -493,7 +493,7 @@ const RootStack = () => {
           options={{
             title: "Ver insumos",
             headerStyle: {
-              backgroundColor: "#474747",
+              backgroundColor: "#8643B3",
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
