@@ -55,7 +55,7 @@ const Stats = ({ navigation }) => {
         <CustomText text={item.inDate} style={styles.text} />
         <CustomText text="Precio" style={styles.text} />
         <CustomText text={item.price} style={styles.text} />
-        <CustomText text="aaa" style={styles.text} />
+        <CustomText text="Repuestos" style={styles.text} />
         <CustomText text={item.replacement} style={styles.text} />
       </View>
     );
